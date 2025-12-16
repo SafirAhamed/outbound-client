@@ -156,6 +156,9 @@ export default function PackageDetailClient({ id }: Props) {
                 original: data.booking_details.original_price,
                 discounted: data.booking_details.discounted_price,
               }}
+              packageTitle={data.title}
+              days={data.meta.days}
+              nights={data.meta.nights}
               perLabel={data.booking_details.person_label}
               includes={data.booking_details.includes}
               cancellationNote={data.booking_details.cancellation_note}

@@ -63,12 +63,12 @@ export default function MapItineraryModal({
 
       mapRef.current = map;
 
-      Lmod.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+      Lmod.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      ).addTo(map);
 
       // Convert list to Leaflet LatLng objects
-      const latLngs: L.LatLng[] = points.map(
-        (p) => Lmod!.latLng(p.lat, p.lng)
-      );
+      const latLngs: L.LatLng[] = points.map((p) => Lmod!.latLng(p.lat, p.lng));
 
       /** --------------------------
        * MARKERS
@@ -156,17 +156,25 @@ export default function MapItineraryModal({
         dirRef.current = 1;
       }
 
-      let i = 0;
-      while (i < d.length - 1 && progressRef.current > d[i + 1]) i++;
+        // If we don't have at least two points, skip animation and just place the marker
+        if (!latLngs || latLngs.length < 2) {
+          flight.setLatLng(latLngs[0]);
+          return;
+        }
+      
+        let i = 0;
+        while (i < d.length - 1 && progressRef.current > d[i + 1]) i++;
 
-      const ratio =
-        (progressRef.current - d[i]) / (d[i + 1] - d[i] || 1);
+        // Safety: ensure next index exists
+        const nextIndex = Math.min(i + 1, latLngs.length - 1);
+        const segmentLen = Math.max(d[nextIndex] - d[i], 1);
+        const ratio = (progressRef.current - d[i]) / segmentLen;
 
-      const a = latLngs[i];
-      const b = latLngs[i + 1];
+        const a = latLngs[i];
+        const b = latLngs[nextIndex];
 
-      const lat = a.lat + (b.lat - a.lat) * ratio;
-      const lng = a.lng + (b.lng - a.lng) * ratio;
+        const lat = a.lat + (b.lat - a.lat) * ratio;
+        const lng = a.lng + (b.lng - a.lng) * ratio;
 
       flight.setLatLng([lat, lng]);
 
@@ -181,31 +189,50 @@ export default function MapItineraryModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
-      <div className="bg-white w-full max-w-5xl rounded-xl overflow-hidden relative">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 bg-white shadow rounded-full w-8 h-8 flex items-center justify-center"
-        >
-          <X />
-        </button>
+    <div
+      className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50"
+      onClick={onClose}
+      aria-modal="true"
+      role="dialog"
+    >
+      <div
+        className="bg-white w-full max-w-6xl rounded-xl overflow-hidden relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button (visible on all layouts) */}
 
-        {/* Map */}
-        <div className="h-[50vh] relative">
-          {state.loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/70">
-              <span className="loading loading-spinner loading-lg"></span>
+        {/* Responsive layout: map left, content right on desktop; stacked on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Map panel */}
+          <div className="relative h-[40vh] md:h-[70vh]">
+            {state.loading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/70">
+                <span className="loading loading-spinner loading-lg"></span>
+              </div>
+            )}
+            <div ref={containerRef} className="h-full w-full" />
+          </div>
+
+          {/* Details panel */}
+          <div className="p-4 md:p-6 md:pt-4 max-h-[40vh] md:max-h-[70vh] overflow-y-auto bg-gray-50">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-sm md:text-base font-semibold text-slate-900">
+                Itineraries
+              </h4>
+              <button
+                onClick={onClose}
+                className=" bg-white/95 shadow rounded-full w-7 h-7 flex items-center justify-center z-10 border border-slate-200"
+                aria-label="Close"
+              >
+                <X className="w-4 h-4 text-slate-700" />
+              </button>
             </div>
-          )}
-          <div ref={containerRef} className="h-full w-full" />
-        </div>
-
-        {/* Bottom itinerary list */}
-        <div className="p-4 max-h-[40vh] overflow-y-auto bg-gray-50">
-          {days.map((day) => (
-            <ItineraryDayCard item={day} key={day.day} />
-          ))}
+            <div className="space-y-3">
+              {days.map((day) => (
+                <ItineraryDayCard item={day} key={day.day} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

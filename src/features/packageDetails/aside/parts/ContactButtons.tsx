@@ -15,7 +15,7 @@ export default function ContactButtons({
   packageTitle?: string;
   days?: number;
   nights?: number;
-  price?: string;
+  price?: string | number;
 }) {
   const url = typeof window !== "undefined" ? window.location.href : "";
 
@@ -23,7 +23,11 @@ export default function ContactButtons({
 
 *Package Name:* ${packageTitle || "N/A"}
 *Duration:* ${days || "?"} Days / ${nights || "?"} Nights
-*Price:* ₹${price || "?"}
+*Price:* ₹${
+    typeof price !== "undefined" && price !== null && `${price}`.trim().length > 0
+      ? price
+      : "?"
+  }
 *Package Link:* ${url}
 
 Please provide more details.`;

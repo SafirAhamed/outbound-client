@@ -4,6 +4,7 @@ export const API_URLS = {
   destinations: "/destinations",
   packages: "/packages",
   search: "/search",
+  bookingEnquiry: "/booking-enquiry",
   packageDetail: (id: string) => `/packages/${id}`,
   relatedPackages: (id: string) => `/packages/${id}/related`,
 };

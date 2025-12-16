@@ -19,6 +19,9 @@ export interface BookingAsideProps {
   ctaLabel?: string;
   price_type?: string;
   seoUrl?: string; // ADDED
+  packageTitle?: string;
+  days?: number;
+  nights?: number;
 }
 
 export default function BookingAside(props: BookingAsideProps) {
@@ -33,6 +36,9 @@ export default function BookingAside(props: BookingAsideProps) {
     ctaLabel = "Check Availability",
     price_type = "From",
     seoUrl, // ADDED
+    packageTitle,
+    days,
+    nights,
   } = props;
 
   const [open, setOpen] = useState(false);
@@ -66,7 +72,7 @@ export default function BookingAside(props: BookingAsideProps) {
 
       <VerificationPanel />
 
-      <ContactButtons />
+      <ContactButtons packageTitle={packageTitle} days={days} nights={nights} price={pricing.discounted} />
 
       <OfferStructuredData pricing={pricing} currency={curr} url={seoUrl} />
 

@@ -33,7 +33,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       {children}
 
       {/* DaisyUI Toast Container */}
-      <div className="toast toast-top toast-end z-50">
+      <div className="toast toast-top toast-end z-2000">
         {toasts.map((toast) => (
           <div
             key={toast.id}
