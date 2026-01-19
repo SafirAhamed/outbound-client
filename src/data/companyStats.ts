@@ -47,17 +47,17 @@ export const EBOOK_PROMO: EbookPromo = {
   subtitle: "Exclusive Early Access",
   description:
     "Strategic destination insights, seasonal timing frameworks, experience blueprints, and budgeting matrices distilled for modern explorers.",
-  image: "https://img.freepik.com/free-photo/international-day-education-cartoon-style-with-open-book-fantasy-world_23-2151007433.jpg?semt=ais_hybrid&w=740&q=80",
+  image: "/images/ebookbanner.png",
   cta: "Coming Soon",
   href: "#",
   colors: {
     title: "#FFFFFF",          // neutral-900
-    subtitle: "#FFFFFF",       // brand accent
+    subtitle: "#06A15c",       // brand accent
     description: "#FFFFFF",    // neutral-700
-    buttonBg: "#052210",
+    buttonBg: "#06A15C",
     buttonText: "#FFFFFF",
-    overlayFrom: "rgba(0,0,0,0.05)",
-    overlayTo: "rgba(0,0,0,0.05)",
+    overlayFrom: "rgba(0,0,0,0.4)",
+    overlayTo: "rgba(0,0,0,0.4)",
     border: "#E5E7EB",         // neutral-200
     accentBg: "#F3F4F6",       // neutral-100
   },

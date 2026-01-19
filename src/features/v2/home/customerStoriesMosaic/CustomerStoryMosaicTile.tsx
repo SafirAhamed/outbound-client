@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import type { CustomerStory } from "@/types/customer.types";
-import { Heart, MessageCircle, Repeat2, Send, MoreHorizontal, Volume2 } from "lucide-react";
+import { Heart, MessageCircle, Repeat2, Send, MoreHorizontal, Volume2, VolumeX } from "lucide-react";
 import Image from "next/image";
 
 export default function CustomerStoryMosaicTile({
@@ -15,6 +16,26 @@ export default function CustomerStoryMosaicTile({
   onClick: () => void;
   className?: string;
 }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+
+  useEffect(() => {
+    if (story.storyType !== "video") return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Autoplay policies: must be muted + playsInline (especially iOS).
+    video.muted = true;
+    video.playsInline = true;
+
+    const attempt = video.play();
+    if (attempt && typeof attempt.catch === "function") {
+      attempt.catch(() => {
+        // Ignore autoplay rejections; the tile can still open fullscreen on tap.
+      });
+    }
+  }, [story.storyType, story.storyMedia]);
+
   const hashStringToInt = (value: string) => {
     let hash = 0;
     for (let i = 0; i < value.length; i += 1) {
@@ -88,18 +109,47 @@ export default function CustomerStoryMosaicTile({
           onClick();
         }
       }}
-      className={`group relative w-full h-[380px] sm:h-80 lg:h-[400px] xl:h-[440px] overflow-hidden ${cornerClass} ring-1 ${ringClass} bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 mb-1 ${className}`}
+      className={`group relative w-full h-[380px] sm:h-80 lg:h-[400px] xl:h-[440px] overflow-hidden ${cornerClass} ring-1 ${ringClass} bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 mb-1 transition-transform duration-300 ease-out will-change-transform hover:-translate-y-1 ${className}`}
       aria-label={`Open story by ${story.customerName}`}
     >
       {/* Media */}
-      <Image
-        src={story.storyThumbnail}
-        alt={story.caption || "Customer story"}
-        fill
-        priority={index === 0}
-        sizes="(min-width: 1024px) 25vw, 50vw"
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-      />
+      {story.storyType === "video" && story.storyMedia ? (
+        <>
+          <video
+            ref={videoRef}
+            className="absolute inset-0 h-full w-full object-cover pointer-events-none transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+            src={story.storyMedia}
+            poster={story.storyThumbnail}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            onCanPlay={() => setIsVideoReady(true)}
+            aria-hidden="true"
+          />
+          {/* Keep thumbnail as a fallback layer for slow loads */}
+          <Image
+            src={story.storyThumbnail}
+            alt={story.caption || "Customer story"}
+            fill
+            priority={index === 0}
+            sizes="(min-width: 1024px) 25vw, 50vw"
+            className={`object-cover pointer-events-none transition-opacity duration-300 ${
+              isVideoReady ? "opacity-0" : "opacity-100"
+            }`}
+          />
+        </>
+      ) : (
+        <Image
+          src={story.storyThumbnail}
+          alt={story.caption || "Customer story"}
+          fill
+          priority={index === 0}
+          sizes="(min-width: 1024px) 25vw, 50vw"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+        />
+      )}
 
       {/* Texture overlays */}
       <div
@@ -132,7 +182,7 @@ export default function CustomerStoryMosaicTile({
           </div>
 
           <div className="hidden sm:inline-flex items-center gap-2 rounded-full bg-black/15 px-2.5 py-1 backdrop-blur-sm ring-1 ring-white/10">
-            <Volume2 size={13} className="text-white/90" aria-hidden="true" />
+            <VolumeX size={13} className="text-white/90" aria-hidden="true" />
             <span className="text-[10px] font-semibold tracking-wide text-white/85">Audio</span>
           </div>
         </div>

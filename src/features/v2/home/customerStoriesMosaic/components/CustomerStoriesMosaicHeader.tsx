@@ -25,6 +25,7 @@ export default function CustomerStoriesMosaicHeader({
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[0.20em] text-white">
         {heading?.toUpperCase()}
       </h2>
+      <div className="h-1 w-34 bg-white mx-auto mb-2 rounded"></div>
       <p className="text-sm sm:text-base text-white/80 max-w-2xl">{subheading}</p>
 
       <div className="mt-3 flex flex-col sm:flex-row items-center justify-center gap-3">

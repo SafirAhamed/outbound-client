@@ -21,6 +21,7 @@ const TrendingPackages = () => {
             subtitle={item.description}
             days={item.days}
             nights={item.nights}
+            travelStyle={item.travelStyle}
             price={item.price}
             link={item.link}
             portrait

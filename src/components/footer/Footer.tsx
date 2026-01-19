@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
             >
               {section.items ? (
                 <>
-                  <h3 className="text-white font-semibold text-sm uppercase tracking-wide mb-3 border-b border-gray-200 pb-1">
+                  <h3 className="text-white font-semibold text-sm uppercase tracking-wide mb-3 border-b w-fit border-gray-200 pb-1">
                     {section.title}
                   </h3>
                   <ul className="space-y-1.5 text-xs text-white">
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
               ) : (
                 section.contact && (
                   <>
-                    <h3 className="text-white font-semibold text-sm uppercase tracking-wide mb-3 border-b border-gray-200 pb-1">
+                    <h3 className="text-white font-semibold text-sm uppercase tracking-wide mb-3 border-b w-fit border-gray-200 pb-1">
                       {section.title}
                     </h3>
                     <div className="space-y-2 text-xs text-white">
@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
                         </p>
                       </div>
                       <div>
-                        <p className="font-medium text-white mb-0.5">
+                        <p className="font-medium text-white mb-0.5 border-b w-fit border-gray-200 pb-1">
                           Travel Guides:
                         </p>
                         <p className="text-[10px]">{section.contact.guideInfo}</p>

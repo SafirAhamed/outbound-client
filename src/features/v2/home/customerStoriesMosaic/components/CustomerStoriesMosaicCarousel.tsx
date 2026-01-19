@@ -12,6 +12,7 @@ export default function CustomerStoriesMosaicCarousel({
   pageCount,
   pageSize,
   onOpenStory,
+  autoSlide = false,
 }: {
   pages: CustomerStory[][];
   page: number;
@@ -19,6 +20,7 @@ export default function CustomerStoriesMosaicCarousel({
   pageCount: number;
   pageSize: number;
   onOpenStory: (absoluteIndex: number) => void;
+  autoSlide?: boolean;
 }) {
   const [visualPage, setVisualPage] = useState(page);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
@@ -51,6 +53,7 @@ export default function CustomerStoriesMosaicCarousel({
   }, [setPage]);
 
   useEffect(() => {
+    if (!autoSlide) return;
     if (pageCount <= 1) return;
 
     const id = window.setInterval(() => {
@@ -60,7 +63,7 @@ export default function CustomerStoriesMosaicCarousel({
     return () => {
       window.clearInterval(id);
     };
-  }, [goNext, pageCount]);
+  }, [autoSlide, goNext, pageCount]);
 
   return (
     <div className="mt-7 sm:mt-9">

@@ -8,31 +8,31 @@ export const CUSTOMER_GALLERY_ROW1: MarqueeItem[] = [
     id: "r1-1",
     type: "image",
     imageSrc:
-      "https://images.unsplash.com/photo-1509644851462-c1046a725ff3?q=80&w=800&auto=format&fit=crop",
+      "https://media3.thrillophilia.com/filestore/jezkw1hz3yrpmiqlbobdguc5f54m_shutterstock_1938178192.jpg?w=1440&dpr=2",
   },
   {
     id: "r1-2",
     type: "image",
     imageSrc:
-      "https://images.unsplash.com/photo-1506976785307-8732e854ad03?q=80&w=800&auto=format&fit=crop",
+      "https://www.lovelytrails.com/admin/image.php?path=photouploads%2F17048583927.jpg",
   },
   {
     id: "r1-3",
     type: "image",
     imageSrc:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop",
+      "https://go4explore.com/_next/image?url=https%3A%2F%2Fd2qa7a8q0vuocm.cloudfront.net%2Fimages%2F39550020241118085132.png&w=3840&q=75",
   },
   {
     id: "r1-4",
     type: "image",
     imageSrc:
-      "https://images.unsplash.com/photo-1549893074-0b9c9e3f7caf?q=80&w=800&auto=format&fit=crop",
+      "https://media3.thrillophilia.com/filestore/o53vpvq51a8p0tci6buwp8kavawt_DSC_0003.JPG?w=400&dpr=2",
   },
   {
     id: "r1-5",
     type: "image",
     imageSrc:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlpXEfZ5ZzYHejEpOBgA9IEjmtsRsmTUTmHQ&s",
   },
 ];
 
@@ -76,8 +76,8 @@ export const CUSTOMER_STORIES: CustomerStory[] = [
     customerName: "Steve Harrington",
     customerImage: "https://static.wikia.nocookie.net/strangerthings8338/images/5/5c/Steve_-_Season_4.jpg/revision/latest/scale-to-width-down/1000?cb=20220719024524",
     storyThumbnail: "https://hikerwolf.com/wp-content/uploads/2020/04/WhatsApp-Image-2020-04-02-at-7.18.33-PM.jpeg",
-    storyMedia: "https://hikerwolf.com/wp-content/uploads/2020/04/WhatsApp-Image-2020-04-02-at-7.18.33-PM.jpeg",
-    storyType: "image",
+    storyMedia: "https://static.vecteezy.com/system/resources/previews/034/138/597/mp4/snow-hill-nature-free-video.mp4",
+    storyType: "video",
     caption: "Kathmandu sunrise!",
   },
   {

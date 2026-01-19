@@ -7,7 +7,7 @@ import StarRating from "@/src/components/common/StarRating";
 import ViewAllLink from "@/src/components/common/layout/ViewAllLink";
 import PriceBlock from "./PriceBlock";
 import { PackagesCardItem } from "@/types/packages.types";
-import { Phone } from "lucide-react";
+import { Heart, Phone, User, Users } from "lucide-react";
 
 const PortraitCard: React.FC<PackagesCardItem> = ({
   image,
@@ -16,6 +16,7 @@ const PortraitCard: React.FC<PackagesCardItem> = ({
   rating,
   days,
   nights,
+  travelStyle,
   price,
   link,
   detailed,
@@ -45,6 +46,10 @@ Please provide more details.`;
     message
   )}`;
 
+  const styleLabel = travelStyle || `${days}D / ${nights}N`;
+  const StyleIcon =
+    travelStyle === "Solo" ? User : travelStyle === "Couple" ? Heart : Users;
+
   return (
     <article className="group/card rounded-xl shadow-md overflow-hidden flex flex-col">
       <div className="relative w-full h-56 overflow-hidden">
@@ -54,14 +59,14 @@ Please provide more details.`;
           fill
           className="object-cover transition-transform duration-500 group-hover/card:scale-110"
         />
-        <div className="absolute top-2 left-2 bg-emerald-600 text-white px-3 py-1 text-xs rounded-full">
+        <div className="absolute top-2 left-2 bg-secondary text-white px-3 py-1 text-xs rounded-full">
           {days}D / {nights}N
         </div>
       </div>
 
       <div className="p-5 flex flex-col justify-between h-[220px]">
         <div>
-          <h3 className="text-lg font-bold text-emerald-900 line-clamp-1 mb-1">
+          <h3 className="text-lg font-bold text-secondary line-clamp-1 mb-1">
             {title}
           </h3>
 
@@ -74,17 +79,11 @@ Please provide more details.`;
 
         <div className="flex justify-between items-end">
           <div className="flex flex-col gap-6">
-            <div className="flex items-center text-emerald-700 text-sm font-semibold">
-              <svg width={18} height={18} fill="none" viewBox="0 0 24 24">
-                <path
-                  d="M8 7V3m8 4V3M3 11h18M5 19h14a2 2 0 002-2v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7a2 2 0 002 2z"
-                  stroke="#059669"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              {days}D / {nights}N
+            <div className="inline-flex items-center w-fit py-1 gap-1 text-secondary text-[11px] font-semibold ">
+              <span className="inline-flex items-center justify-center">
+                <StyleIcon className="h-3 w-3" aria-hidden="true" />
+              </span>
+              <span className="leading-none">{styleLabel}</span>
             </div>
 
             <Popover
@@ -97,7 +96,7 @@ Please provide more details.`;
                   type="button"
                   onClick={onClick}
                   aria-expanded={ariaExpanded}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm px-4 py-1.5 rounded-full font-semibold shadow cursor-pointer"
+                  className="bg-secondary hover:bg-secondary text-white text-sm px-4 py-1.5 rounded-full font-semibold shadow cursor-pointer"
                 >
                   Enquiry
                 </button>
@@ -108,7 +107,7 @@ Please provide more details.`;
                   <a
                     href={`tel:${TEL_NUMBER}`}
                     onClick={close}
-                    className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-700"
+                    className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-2 text-xs font-semibold text-white hover:bg-secondary"
                     aria-label="Call"
                   >
                     <Phone className="h-4 w-4" />
@@ -119,7 +118,7 @@ Please provide more details.`;
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={close}
-                    className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-700"
+                    className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-2 text-xs font-semibold text-white hover:bg-secondary"
                     aria-label="WhatsApp"
                   >
                     <Image src="/images/whatsappLogo.png" alt="" width={16} height={16} />

@@ -19,14 +19,22 @@ const SAMPLE_BANNER: HeroBannerType = {
     "Explore curated destinations, tailored packages, and unforgettable experiences.",
   design: {
     videoSources: [
-      //   {
-      //     src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-      //     type: "video/mp4",
-      //   },
-      //   {
-      //     src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.webm",
-      //     type: "video/webm",
-      //   },
+        {
+          src: "https://cdn.pixabay.com/video/2021/10/12/91757-636709171_large.mp4",
+          type: "video/mp4",
+        },
+        {
+          src: "https://static.vecteezy.com/system/resources/previews/034/138/597/webm/snow-hill-nature-free-video.webm",
+          type: "video/webm",
+        },
+        // {
+        //   src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+        //   type: "video/mp4",
+        // },
+        // {
+        //   src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.webm",
+        //   type: "video/webm",
+        // },
     ],
     fallbackImage:
       "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop",

@@ -43,7 +43,7 @@ export default function CustomerGallerySection({
         </div>
 
         <MarqueeStrip
-          items={row2}
+          items={row1}
           speed="slow"
           direction="left"
           pauseOnHover

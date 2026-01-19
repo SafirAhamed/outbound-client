@@ -14,6 +14,7 @@ const LandscapeCard: React.FC<PackagesCardItem> = ({
   rating,
   days,
   nights,
+  travelStyle,
   price,
   link,
   detailed,
@@ -32,7 +33,7 @@ const LandscapeCard: React.FC<PackagesCardItem> = ({
         />
 
         <div className="absolute top-2 left-2 bg-emerald-600 text-white text-xs px-3 py-1 rounded-full">
-          {days}D / {nights}N
+          {travelStyle || `${days}D / ${nights}N`}
         </div>
       </div>
 
@@ -49,7 +50,7 @@ const LandscapeCard: React.FC<PackagesCardItem> = ({
         <div className="flex justify-between items-end mt-2">
           <div className="flex flex-col gap-5.5">
             <div className="flex items-center gap-1 text-emerald-700 font-semibold">
-              {days}D / {nights}N
+              {travelStyle || `${days}D / ${nights}N`}
             </div>
 
             <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 rounded-full shadow">

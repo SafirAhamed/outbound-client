@@ -32,8 +32,9 @@ export const VIDEO_CARD_FEATURE: VideoCardConfig = {
   id: "discover-more",
   poster: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop",
   videoSources: [
-    { src: "/videos/Himalaya.webm", type: "video/webm" },
-    { src: "/videos/Himalaya.mp4", type: "video/mp4" },
+    // { src: "https://cdn.pixabay.com/video/2021/10/12/91757-636709171_large.mp4", type: "video/mp4" },
+    { src: "https://static.vecteezy.com/system/resources/previews/034/138/597/mp4/snow-hill-nature-free-video.mp4", type: "video/mp4" },
+    { src: "https://cdn.pixabay.com/video/2021/10/12/91757-636709171_large.webm", type: "video/webm" },
   ],
   heading: "Elevate Every Journey",
   subheading: "Deep Insights. Smarter Planning.",

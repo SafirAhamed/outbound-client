@@ -6,6 +6,7 @@ export interface PackagesCardItem {
   rating: number;
   days: number;
   nights: number;
+  travelStyle?: "Couple" | "Friends" | "Solo" | "Family" | "Group";
   price: string;
   link: string;
   portrait?: boolean;
@@ -24,6 +25,7 @@ export interface Package {
   rating: number;
   days: number;
   nights: number;
+  travelStyle?: "Couple" | "Friends" | "Solo" | "Family" | "Group";
   price: string;
   link: string;
   originalPrice?: string;
