@@ -35,7 +35,12 @@ const FilterBar: React.FC<Props> = ({
   className = "",
 }) => {
   return (
-    <div className={"mb-5 overflow-x-auto mx-auto whitespace-nowrap lg:whitespace-normal " + className}>
+    <div
+      className={
+        "mb-5 overflow-x-auto scrollbar-hide mx-auto whitespace-nowrap lg:whitespace-normal " +
+        className
+      }
+    >
       <div className="inline-flex lg:grid gap-3 lg:gap-4 w-fit lg:grid-cols-4 mb-1">
         {filters.map(({ key, label, options }) => {
           const selectedValue = values[key];

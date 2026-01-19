@@ -16,3 +16,16 @@ export interface PackagesCardItem {
   advance_style?: boolean;
   style_variant?: "default" | "ticket" | "glass" | "classic";
 }
+
+export interface Package {
+  image: string;
+  title: string;
+  description: string;
+  rating: number;
+  days: number;
+  nights: number;
+  price: string;
+  link: string;
+  originalPrice?: string;
+  discountedPrice?: string;
+}

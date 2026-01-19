@@ -1,5 +1,51 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: outbound --default;
+}
+
+@plugin "daisyui/theme" {
+  name: "outbound";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #ffffff;
+  --color-base-200: #f3f4f6;
+  --color-base-300: #e5e7eb;
+  --color-base-content: #052210;
+
+  --color-primary: #052210;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #06a15c;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #06a15c;
+  --color-accent-content: #ffffff;
+
+  --color-neutral: #1c1c1c;
+  --color-neutral-content: #ffffff;
+
+  --color-info: #052210;
+  --color-info-content: #ffffff;
+  --color-success: #06a15c;
+  --color-success-content: #ffffff;
+  --color-warning: #052210;
+  --color-warning-content: #ffffff;
+  --color-error: #052210;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
 
 :root {
   --background: #ffffff;
@@ -10,8 +56,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -24,16 +68,19 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-lato, ui-sans-serif), ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-/* ===== GLOBAL TRANSPARENT THIN SCROLLBAR ===== */
+/* ===== SCROLLBAR UTILITIES (OPT-IN) ===== */
 
-/* Chrome / Edge / Safari */
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE/Edge legacy */
+  scrollbar-width: none; /* Firefox */
+}
 
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: transparent;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
 }

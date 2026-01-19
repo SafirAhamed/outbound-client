@@ -8,8 +8,19 @@ export interface SectionProps {
   lessSpace?: boolean;
   noSpace?: boolean;
   fullWidth?: boolean;
+  centerTitle?: boolean;
+  titleSize?: "small" | "medium" | "large";
   className?: string;
 }
+
+const TITLE_SIZE_CLASSES: Record<
+  NonNullable<SectionProps["titleSize"]>,
+  string
+> = {
+  small: "text-base md:text-lg lg:text-xl",
+  medium: "text-lg md:text-2xl lg:text-3xl",
+  large: "text-xl md:text-3xl lg:text-4xl",
+};
 
 const Section: React.FC<SectionProps> = ({
   title,
@@ -18,8 +29,12 @@ const Section: React.FC<SectionProps> = ({
   lessSpace,
   noSpace,
   fullWidth,
+  centerTitle,
+  titleSize = "medium",
   className,
 }) => {
+  const titleSizeClasses = TITLE_SIZE_CLASSES[titleSize];
+
   return (
     <div
       className={`relative max-w-screen-2xl mx-auto mt-4 sm:mt-6  ${className} ${
@@ -34,14 +49,32 @@ const Section: React.FC<SectionProps> = ({
     >
       {title && (
         <div
-          className={`flex items-center justify-between mb-4 ${
-            noSpace ? "mx-2 md:mx-4 lg:mx-6" : ""
-          }`}
+          className={`${
+            centerTitle
+              ? "grid grid-cols-3 items-center"
+              : "flex items-center justify-between"
+          } mb-4 ${noSpace ? "mx-2 md:mx-4 lg:mx-6" : ""}`}
         >
-          <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-[#052210] capitalize ">
-            {title}
-          </h2>
-          {viewAllUrl && <ViewAllLink viewAll={viewAllUrl} />}
+          {centerTitle ? (
+            <>
+              <div />
+              <h2
+                className={`${titleSizeClasses} font-bold tracking-tight text-[#052210] capitalize text-center whitespace-nowrap`}
+              >
+                {title}
+              </h2>
+              <div className="flex justify-end">
+                {viewAllUrl && <ViewAllLink viewAll={viewAllUrl} />}
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className={`${titleSizeClasses} font-bold tracking-tight text-[#052210] capitalize `}>
+                {title}
+              </h2>
+              {viewAllUrl && <ViewAllLink viewAll={viewAllUrl} />}
+            </>
+          )}
         </div>
       )}
       {children}

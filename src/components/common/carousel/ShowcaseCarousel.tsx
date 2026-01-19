@@ -168,7 +168,7 @@ export default function ShowcaseCarousel({
         <div className="relative w-full h-full flex items-center justify-center">
           {items.map((d, i) => (
             <div
-              key={d.id}
+              key={d.image}
               onClick={() => goTo(i)}
               className={`absolute
                 w-[120px] h-40

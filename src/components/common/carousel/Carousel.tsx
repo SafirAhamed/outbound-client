@@ -50,7 +50,7 @@ const Carousel = <T,>({
           className="flex gap-3 overflow-x-auto scroll-smooth scrollbar-hide snap-x snap-mandatory"
         >
           {items.map((item, index) => (
-            <div key={index} className="snap-start shrink-0 flex-none my-3">
+            <div key={index} className="snap-start shrink-0 flex-none my-1">
               {renderCard(item, index)}
             </div>
           ))}

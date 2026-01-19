@@ -6,7 +6,7 @@ import { SlideItem } from "@/types/carousel.types";
 export default function ThumbnailItem({ slide }: { slide: SlideItem }) {
   return (
     <div
-      className="group relative w-full h-full rounded-xl bg-white border shadow-sm overflow-hidden
+      className="group relative w-full h-full rounded-xl bg-white shadow-sm overflow-hidden
                  transform transition-all duration-300 ease-out
                  hover:shadow-xl hover:scale-[1.03]"
     >

@@ -3,6 +3,7 @@ const config  = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -26,8 +27,8 @@ const config  = {
       {
         outbound: {
           primary: "#052210",
-          secondary: "#c5f8a8",
-          accent: "#0a3a1a",
+          secondary: "#06a15c",
+          accent: "#06a15c",
           neutral: "#1c1c1c",
           "base-100": "#ffffff",
         },

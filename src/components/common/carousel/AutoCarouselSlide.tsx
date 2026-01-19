@@ -65,7 +65,7 @@ function AutoCarouselSlide({ slide, priority = false }: AutoCarouselSlideProps) 
         {slide.buttonText && (
           <Link
             href={slide.link ?? "#"}
-            className="text-sm md:text-base px-4 py-2 rounded-full transition-opacity hover:opacity-90"
+            className="text-sm md:text-base font-bold px-4 py-2 rounded-full transition-opacity hover:opacity-90"
             style={buttonStyle}
           >
             {slide.buttonText}

@@ -10,13 +10,30 @@ export interface HeroBanner {
   design: {
     videoSources: VideoSource[];
     fallbackImage: string;
-    overlayClass: string;
+    // Admin/API keys (preferred)
+    padding?: "none" | "small" | "medium" | "large";
+    overlay?: "none" | "light" | "medium" | "strong";
+
+    // Preferred: admin-driven token (mapped to Tailwind classes in UI)
+    overlayStrength?: "none" | "light" | "medium" | "strong";
+    // Backward-compatible escape hatch
+    overlayClass?: string;
     titleClasses: string;
     subTitleClasses: string;
     fontFamily: string;
     heightClass: string;
     title: string;
     subTitle: string;
+    rotatedText?: string[]
+
+    // Optional: admin-driven layout controls
+    fontUrl?: string;
+    boxBgClass?: string;
+    boxPaddingSize?: "none" | "small" | "medium" | "large";
+    boxPaddingClass?: string;
+    positionClasses?: string;
+    titleColorHex?: string;
+    subTitleColorHex?: string;
   };
 }
 

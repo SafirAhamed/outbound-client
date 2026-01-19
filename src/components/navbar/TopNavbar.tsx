@@ -40,7 +40,7 @@ export default function TopNavbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image src={logoWhite} alt="Outbound Travelers Logo" width={40} height={40} priority />
-          <span className="text-lg font-semibold">Outbound Travelers</span>
+          <span className="text-lg font-bold">Outbound Travelers</span>
         </Link>
 
         {/* Desktop Navbar */}

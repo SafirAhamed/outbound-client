@@ -46,6 +46,14 @@ export default function VideoCard({ config, className = "" }: VideoCardProps) {
   const TEXT_DELAY_MS = 250;
   const TEXT_DURATION_MS = 1200;
 
+  const fadeUpStyle = (extraDelayMs: number) =>
+    ({
+      transition: "opacity 900ms ease-out, transform 900ms ease-out",
+      transitionDelay: isVisible ? `${TEXT_DELAY_MS + extraDelayMs}ms` : "0ms",
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible ? "translateY(0)" : "translateY(1rem)",
+    }) as const;
+
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -91,7 +99,7 @@ export default function VideoCard({ config, className = "" }: VideoCardProps) {
   return (
     <section
       ref={containerRef}
-      className={`relative w-full shadow-sm border border-neutral-200 ${className}`}
+      className={`relative w-full max-w-screen-2xl mx-auto shadow-sm  ${className}`}
       style={{ height, minHeight }}
       aria-label={heading}
     >
@@ -163,13 +171,7 @@ export default function VideoCard({ config, className = "" }: VideoCardProps) {
         {subheading && (
           <p
             className="text-sm sm:text-base font-medium"
-            style={{
-              color: subheadingColor,
-              transition: "opacity 900ms ease-out, transform 900ms ease-out",
-              transitionDelay: isVisible ? `${TEXT_DELAY_MS + 150}ms` : "0ms",
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "translateY(0)" : "translateY(1rem)",
-            }}
+            style={{ color: subheadingColor, ...fadeUpStyle(150) }}
           >
             {subheading}
           </p>
@@ -177,30 +179,19 @@ export default function VideoCard({ config, className = "" }: VideoCardProps) {
         {description && (
           <p
             className="text-xs sm:text-sm max-w-2xl leading-relaxed"
-            style={{
-              color: descriptionColor,
-              transition: "opacity 900ms ease-out, transform 900ms ease-out",
-              transitionDelay: isVisible ? `${TEXT_DELAY_MS + 300}ms` : "0ms",
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "translateY(0)" : "translateY(1rem)",
-            }}
+            style={{ color: descriptionColor, ...fadeUpStyle(300) }}
           >
             {description}
           </p>
         )}
         {ctaHref && (
           <div
-            className="mt-2"
-            style={{
-              transition: "opacity 900ms ease-out, transform 900ms ease-out",
-              transitionDelay: isVisible ? `${TEXT_DELAY_MS + 450}ms` : "0ms",
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "translateY(0)" : "translateY(1rem)",
-            }}
+            className="mt-2 hover:scale-[1.02] transition-transform active:outline-none active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            style={fadeUpStyle(450)}
           >
             <a
               href={ctaHref}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-medium text-sm shadow-sm hover:shadow-md transition active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-medium text-sm shadow-sm hover:shadow-md transition active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               style={{ backgroundColor: ctaBg, color: ctaTextColor }}
             >
               {ctaText}

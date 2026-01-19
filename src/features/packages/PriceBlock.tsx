@@ -22,7 +22,12 @@ const PriceBlock: React.FC<PriceBlockProps> = ({
   discounted_price,
   price,
 }) => {
-  const percent = getDiscountPercent(original_price, discounted_price);
+
+  const percent = getDiscountPercent(typeof original_price === "string" ? original_price?.replaceAll(",", ""): "", typeof discounted_price === "string" ? discounted_price?.replaceAll(",", ""): "");
+  console.log({detailed,
+  original_price,
+  discounted_price,
+  price, percent})
   if (detailed && original_price && discounted_price && percent) {
     return (
       <div className="flex flex-col items-end">

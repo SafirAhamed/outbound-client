@@ -10,3 +10,35 @@ export type DestinationItem = {
   highlights: string[];
   isActive: boolean;
 };
+
+export interface DestinationGrid {
+  id: string;
+  title: string;
+  subtitle?: string;
+  imageSrc: string;
+  href?: string;
+  showOverlay?: boolean;
+  priceFrom?: string | number;
+  sizeMobile?:number;
+  sizeDesktop?: number;
+}
+
+
+export interface Destination {
+  id: string;
+  title: string;
+  subtitle?: string;
+  imageSrc: string;
+  href?: string;
+  showOverlay?: boolean;
+  priceFrom?: string | number;
+  sizeMobile?:number;
+  sizeDesktop?: number;
+}
+
+export interface DestinationCardProps {
+  item: Destination;
+  mobileHeight: number;
+  desktopHeight: number;
+  className?: string;
+}
