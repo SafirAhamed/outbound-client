@@ -1,5 +1,5 @@
 import Header from "@/src/components/header/Header";
-import DestinationList from "@/src/features/destinations/DestinationList";
+import DestinationListSuspense from "@/src/features/destinations/DestinationListSuspense";
 
 const DestinationsPage = () => {
   return (
@@ -26,7 +26,7 @@ const DestinationsPage = () => {
         className="max-w-7xl mx-auto"
       >
         {/* Client component handles everything */}
-        <DestinationList />
+        <DestinationListSuspense />
       </section>
     </main>
   );
