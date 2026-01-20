@@ -1,5 +1,5 @@
 import Header from "@/src/components/header/Header";
-import PackagesList from "@/src/features/packages/PackagesList";
+import PackagesListSuspense from "@/src/features/packages/PackagesListSuspense";
 
 const Page = () => {
   return (
@@ -24,7 +24,7 @@ const Page = () => {
         aria-label="Destinations and Filters"
         className="max-w-7xl mx-auto"
       >
-        <PackagesList />
+        <PackagesListSuspense />
       </section>
     </main>
   );
