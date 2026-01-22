@@ -16,7 +16,7 @@ const PortraitCard: React.FC<PackagesCardItem> = ({
   rating,
   days,
   nights,
-  travelStyle,
+  bestFor,
   price,
   link,
   detailed,
@@ -46,9 +46,9 @@ Please provide more details.`;
     message
   )}`;
 
-  const styleLabel = travelStyle || `${days}D / ${nights}N`;
+  const styleLabel = bestFor || `${days}D / ${nights}N`;
   const StyleIcon =
-    travelStyle === "Solo" ? User : travelStyle === "Couple" ? Heart : Users;
+    bestFor === "Solo" ? User : bestFor === "Couple" ? Heart : Users;
 
   return (
     <article className="group/card rounded-xl shadow-md overflow-hidden flex flex-col">

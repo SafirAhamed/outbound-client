@@ -27,7 +27,7 @@ const DestinationCard: React.FC<Props> = ({ item }) => {
       {/* IMAGE */}
       <div className="relative aspect-4/3 w-full">
         <Image
-          src={item.images?.[0] || "/images/destination-placeholder.jpg"}
+          src={item.images?.[0] || "https://images.luxuryescapes.com/fl_progressive,q_auto:best,dpr_2.0/2h4palzrqdz5l8eh7qso"}
           alt={`${item.place} - ${item.country ?? "Destination"}`}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
@@ -54,7 +54,7 @@ const DestinationCard: React.FC<Props> = ({ item }) => {
       {/* BODY - FLEX COLUMN FIX */}
       <div className="p-3 sm:p-4 flex flex-col justify-between flex-1">
         {/* TOP PART */}
-        <div>
+        {/* <div>
           <div className="flex items-center justify-between">
             <Link
               href={`/packages/${item.place || item.country}`}
@@ -70,11 +70,11 @@ const DestinationCard: React.FC<Props> = ({ item }) => {
           <p className="mt-2 text-xs sm:text-sm text-gray-700 line-clamp-2">
             {item.highlights.join(" • ")}
           </p>
-        </div>
+        </div> */}
 
         {/* BOTTOM FIXED PART */}
         <div
-          className="mt-4 flex items-center justify-between rounded-lg bg-[#f5fff8] border border-lime-200 px-3 py-2"
+          className="mt- flex items-center justify-between rounded-lg bg-[#f5fff8] border border-lime-200 px-3 py-2"
           itemProp="offers"
           itemScope
           itemType="https://schema.org/Offer"

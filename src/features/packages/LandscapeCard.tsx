@@ -2,10 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
+import Popover from "@/src/components/Popover";
 import ViewAllLink from "@/src/components/common/layout/ViewAllLink";
 import StarRating from "@/src/components/common/StarRating";
 import PriceBlock from "./PriceBlock";
 import { PackagesCardItem } from "@/types/packages.types";
+import { Heart, Phone, User, Users } from "lucide-react";
 
 const LandscapeCard: React.FC<PackagesCardItem> = ({
   image,
@@ -14,26 +16,63 @@ const LandscapeCard: React.FC<PackagesCardItem> = ({
   rating,
   days,
   nights,
-  travelStyle,
+  bestFor,
   price,
   link,
   detailed,
   original_price,
   discounted_price,
 }) => {
+  const FALLBACK_IMAGE_URL =
+    "https://images.luxuryescapes.com/fl_progressive,q_auto:best,dpr_2.0/2h4palzrqdz5l8eh7qso";
+
+  const WHATSAPP_NUMBER_RAW =
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "918300306136";
+  const TEL_NUMBER = process.env.NEXT_PUBLIC_TEL_NUMBER || "+918300306136";
+
+  const whatsappNumber = WHATSAPP_NUMBER_RAW.replace(/\D/g, "");
+
+  const url =
+    typeof window !== "undefined"
+      ? new URL(link, window.location.origin).toString()
+      : link;
+
+  const message = `Hello, I am interested in the following travel package:
+
+Package Name: ${title || "N/A"}
+Duration: ${days || "?"} Days / ${nights || "?"} Nights
+Price: ₹${
+    typeof price !== "undefined" &&
+    price !== null &&
+    `${price}`.trim().length > 0
+      ? price
+      : "?"
+  }
+Package Link: ${url}
+
+Please provide more details.`;
+
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(
+    message,
+  )}`;
+
+  const styleLabel = bestFor || `${days}D / ${nights}N`;
+  const StyleIcon =
+    bestFor === "Solo" ? User : bestFor === "Couple" ? Heart : Users;
+
   return (
     <article className="group/card flex h-56 overflow-hidden shadow-md rounded-xl">
       {/* Image */}
       <div className="relative h-full w-1/3 overflow-hidden">
         <Image
-          src={image || "/images/mountainImage.jpg"}
+          src={image || FALLBACK_IMAGE_URL}
           alt={title}
           fill
           className="object-cover transition-transform duration-500 group-hover/card:scale-110"
         />
 
         <div className="absolute top-2 left-2 bg-emerald-600 text-white text-xs px-3 py-1 rounded-full">
-          {travelStyle || `${days}D / ${nights}N`}
+          {days}D / {nights}N
         </div>
       </div>
 
@@ -49,13 +88,59 @@ const LandscapeCard: React.FC<PackagesCardItem> = ({
 
         <div className="flex justify-between items-end mt-2">
           <div className="flex flex-col gap-5.5">
-            <div className="flex items-center gap-1 text-emerald-700 font-semibold">
-              {travelStyle || `${days}D / ${nights}N`}
+            <div className="inline-flex items-center w-fit py-1 gap-1 text-secondary text-[11px] font-semibold ">
+              <span className="inline-flex items-center justify-center">
+                <StyleIcon className="h-3 w-3" aria-hidden="true" />
+              </span>
+              <span className="leading-none">{styleLabel}</span>
             </div>
 
-            <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 rounded-full shadow">
-              Enquiry
-            </button>
+            <Popover
+              side="top"
+              align="start"
+              className="p-2"
+              trigger={({ ref, onClick, "aria-expanded": ariaExpanded }) => (
+                <button
+                  ref={ref}
+                  type="button"
+                  onClick={onClick}
+                  aria-expanded={ariaExpanded}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 rounded-full shadow"
+                >
+                  Enquiry
+                </button>
+              )}
+            >
+              {(close) => (
+                <div className="flex items-center gap-2">
+                  <a
+                    href={`tel:${TEL_NUMBER}`}
+                    onClick={close}
+                    className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-700"
+                    aria-label="Call"
+                  >
+                    <Phone className="h-4 w-4" />
+                    Call
+                  </a>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={close}
+                    className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-700"
+                    aria-label="WhatsApp"
+                  >
+                    <Image
+                      src="/images/whatsappLogo.png"
+                      alt=""
+                      width={16}
+                      height={16}
+                    />
+                    WhatsApp
+                  </a>
+                </div>
+              )}
+            </Popover>
           </div>
 
           <div className="flex flex-col items-end gap-2">

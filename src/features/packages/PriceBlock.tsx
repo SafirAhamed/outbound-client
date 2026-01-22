@@ -23,7 +23,7 @@ const PriceBlock: React.FC<PriceBlockProps> = ({
   price,
 }) => {
 
-  const percent = getDiscountPercent(typeof original_price === "string" ? original_price?.replaceAll(",", ""): "", typeof discounted_price === "string" ? discounted_price?.replaceAll(",", ""): "");
+  const percent = getDiscountPercent(typeof original_price === "string" ? original_price?.replaceAll(",", ""): original_price, typeof discounted_price === "string" ? discounted_price?.replaceAll(",", ""): discounted_price);
   console.log({detailed,
   original_price,
   discounted_price,

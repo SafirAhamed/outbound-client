@@ -6,9 +6,9 @@ import { API_URLS } from "@/src/api/apiUrls";
 import { useToast } from "@/src/context/ToastContext";
 import { fetchWithRetry } from "@/src/lib/fetchWithRetry";
 import { useParams, useSearchParams } from "next/navigation";
-import PackageCard from "./PackageCard";
 import PackagesGridSkeleton from "@/src/skeleton/PackagesGridSkeleton";
 import { PackagesCardItem } from "@/types/packages.types";
+import PackagesSaleMiniCard from "./PackageCard";
 
 const PackagesList: React.FC = () => {
   const params = useParams();
@@ -54,6 +54,11 @@ const PackagesList: React.FC = () => {
               image: raw.image ?? "",
               title: raw.title ?? "Untitled Package",
               subtitle: raw.subtitle ?? "",
+              bestFor:
+                (raw as unknown as { bestFor?: PackagesCardItem["bestFor"] })
+                  .bestFor ??
+                (raw as unknown as { travelStyle?: PackagesCardItem["bestFor"] })
+                  .travelStyle,
               rating: typeof raw.rating === "number" ? raw.rating : 0,
               days: typeof raw.days === "number" ? raw.days : 0,
               nights: typeof raw.nights === "number" ? raw.nights : 0,
@@ -110,7 +115,23 @@ const PackagesList: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {items.map((item) => (
-            <PackageCard key={item.id} {...item} />
+            <PackagesSaleMiniCard
+              key={item.id || item.link}
+              id={item.id}
+              image={item.image}
+              title={item.title}
+              rating={item.rating}
+              subtitle={item.subtitle}
+              days={item.days}
+              nights={item.nights}
+              bestFor={item.bestFor}
+              price={item.price}
+              link={item.link}
+              landscape
+              detailed
+              original_price={item.original_price}
+              discounted_price={item.discounted_price}
+            />
           ))}
         </div>
       )}

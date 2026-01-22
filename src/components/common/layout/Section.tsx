@@ -59,11 +59,11 @@ const Section: React.FC<SectionProps> = ({
             <>
               <div />
               <h2
-                className={`${titleSizeClasses} font-bold tracking-tight text-[#052210] capitalize text-center whitespace-nowrap`}
+                className={`${titleSizeClasses} font-bold tracking-tight text-[#052210] capitalize text-center whitespace-nowrap col-start-2 justify-self-center`}
               >
                 {title}
               </h2>
-              <div className="flex justify-end">
+              <div className="flex justify-end col-start-3">
                 {viewAllUrl && <ViewAllLink viewAll={viewAllUrl} />}
               </div>
             </>

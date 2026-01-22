@@ -1,4 +1,6 @@
+import DestinationCollage from "@/src/components/common/grid/DestinationsCollage";
 import Header from "@/src/components/header/Header";
+import { DOMESTIC_DESTINATIONS } from "@/src/data/internationalDestinations";
 import DestinationListSuspense from "@/src/features/destinations/DestinationListSuspense";
 
 const DestinationsPage = () => {

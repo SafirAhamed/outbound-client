@@ -33,7 +33,7 @@ export default function DestinationCollage({
   className = "",
 }: CommonGridProps) {
   return (
-    <Section title={heading} centerTitle titleSize="large">
+    <Section title={heading} centerTitle titleSize="large" viewAllUrl="#">
       <div className="mx-auto w-full" style={{ maxWidth: 1180 }}>
         {/* {heading && (
           <div className="mb-4 flex flex-col items-center">
