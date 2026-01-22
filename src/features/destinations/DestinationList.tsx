@@ -103,7 +103,8 @@ const DestinationList: React.FC = () => {
           };
         });
 
-        setItems(mapped.length > 0 ? mapped : defaultItems);
+        setItems(defaultItems);
+        // setItems(mapped.length > 0 ? mapped : defaultItems);
         setHasLoadedOnce(true);
       } catch (err: unknown) {
         showToast(
@@ -139,8 +140,8 @@ const DestinationList: React.FC = () => {
                   item={item}
                   mobileHeight={DEFAULT_MOBILE_HEIGHT}
                   desktopHeight={DEFAULT_DESKTOP_HEIGHT}
-                  // categoryLabel={categoryLabel}
-                  // packageCountLabel={packageCountLabel}
+                  categoryLabel={categoryLabel}
+                  packageCountLabel={packageCountLabel}
                 />
               </div>
             );

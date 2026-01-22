@@ -6,6 +6,7 @@ export type TabItem = {
   id: string;
   label: React.ReactNode;
   disabled?: boolean;
+  scrollToId?: string;
 };
 
 export default function Tabs({
@@ -33,7 +34,16 @@ export default function Tabs({
                 aria-selected={isActive}
                 aria-controls={`tab-panel-${t.id}`}
                 disabled={t.disabled}
-                onClick={() => !t.disabled && setActive(i)}
+                type="button"
+                onClick={() => {
+                  if (t.disabled) return;
+                  if (t.scrollToId) {
+                    const el = document.getElementById(t.scrollToId);
+                    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                  }
+                  setActive(i);
+                }}
                 className={[
                   "px-3 py-1.5 text-sm md:text-base rounded-md transition",
                   // remove default outline; show subtle focus only for keyboard users

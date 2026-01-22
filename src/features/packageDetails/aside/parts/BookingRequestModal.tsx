@@ -79,7 +79,7 @@ export default function BookingRequestModal({
             <div className="px-5 pt-5 pb-3">
               <h3 className="text-base font-semibold text-slate-900 flex items-center gap-2">
                 <CalendarRange className="h-5 w-5 text-blue-600" />
-                Check Availability
+                Get Quote
               </h3>
               <p className="mt-1 text-[11px] text-slate-500">
                 Quick request. We respond fast.
@@ -190,19 +190,19 @@ export default function BookingRequestModal({
                 <textarea
                   name="comments"
                   className="textarea textarea-bordered w-full text-sm"
-                  rows={3}
+                  rows={5}
                 />
               </div>
 
               {/* Summary */}
-              <BookingSummary
+              {/* <BookingSummary
                 currency={currency}
                 pricePerPerson={discounted}
                 adults={adults}
                 child={children}
                 start={start}
                 end={end}
-              />
+              /> */}
 
               <div className="flex justify-end gap-2 pt-1">
                 <button

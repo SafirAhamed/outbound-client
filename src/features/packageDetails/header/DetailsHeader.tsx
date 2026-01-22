@@ -1,15 +1,16 @@
 "use client";
 import { Share2Icon, MailIcon, InstagramIcon, CopyIcon } from "lucide-react";
-import StarRating from "@/src/components/common/StarRating";
+import TagPills, { TagPill } from "@/src/components/common/TagPills";
 import { useRef, useState, useEffect } from "react";
 
 interface DetailsHeaderProps {
   title: string;
   location: string;
-  rating: number;
+  rating?: number;
+  tags?: TagPill[];
 }
 
-const DetailsHeader = ({ title, location, rating }: DetailsHeaderProps) => {
+const DetailsHeader = ({ title, location, tags }: DetailsHeaderProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [copied, setCopied] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
@@ -101,9 +102,11 @@ const DetailsHeader = ({ title, location, rating }: DetailsHeaderProps) => {
           )}
         </div>
       </div>
-      <div className="flex items-center gap-2">
-        <p>{location}</p> |
-        <StarRating rating={rating} showLabel={true} showNumber={true} />
+      <div className="mt-1 flex flex-wrap items-center gap-2 bg-red">
+        <p>{location}</p> | 
+        <TagPills
+          tags={tags?.length ? tags : [{ label: "Best Seller", variant: "bestSeller" }]}
+        />
       </div>
       <style jsx>{`
         .animate-fade-in {

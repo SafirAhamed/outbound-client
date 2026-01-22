@@ -33,7 +33,7 @@ export default function BookingAside(props: BookingAsideProps) {
     instant_confirm = "Instant confirm • confirmation email in minutes",
     support = "24/7 support • chat, phone and email",
     includes = ["Airport pickup", "Guided city tour", "Daily breakfast"],
-    ctaLabel = "Check Availability",
+    ctaLabel = "Get Quote",
     price_type = "From",
     seoUrl, // ADDED
     packageTitle,

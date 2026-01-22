@@ -13,6 +13,7 @@ export type TabItem = {
   id: string;
   label: React.ReactNode;
   disabled?: boolean;
+  scrollToId?: string;
 };
 
 export interface BookingDetails {

@@ -9,26 +9,32 @@ import logoWhite from "@/public/images/outboundLogoWhite.png";
 import DesktopNav from "./DesktopNav";
 import MobileDrawer from "./MobileDrawer";
 import { navLinks } from "./navLinks";
+import { usePathname } from "next/navigation";
 
 const TopNavbar = () => {
   const [isWhiteBg, setIsWhiteBg] = useState(false);
   const drawerId = "main-drawer";
+  const pathname = usePathname() || "";
+  const fixed = pathname.includes("/package/");
 
   useEffect(() => {
-    const onScroll = () => setIsWhiteBg(window.scrollY > 10);
+    const onScroll = () => setIsWhiteBg(fixed || window.scrollY > 10);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [fixed]);
 
   return (
     <div className="drawer drawer-end">
       <input id={drawerId} type="checkbox" className="drawer-toggle" />
 
       <div className="drawer-content flex flex-col">
+        {fixed && <div className="w-full h-[70px]"> </div>}
         <header
           className={`navbar fixed top-0 z-50 w-full h-[70px] transition-all duration-300 ${
-            isWhiteBg ? "bg-base-100 shadow-md text-primary" : "bg-transparent text-white"
+            isWhiteBg
+              ? "bg-base-100 shadow-md text-primary"
+              : "bg-transparent text-white"
           }`}
         >
           <div className="flex flex-1 items-center justify-between px-2 lg:px-10 gap-3">
@@ -41,7 +47,10 @@ const TopNavbar = () => {
                   priority
                   className={`object-contain h-10 sm:h-11 ${isWhiteBg ? "invert" : ""}`}
                 />
-                <span className="sm:inline text-lg sm:text-base md:text-lg font-semibold" style={{ fontFamily: "var(--font-lexend)" }}>
+                <span
+                  className="sm:inline text-lg sm:text-base md:text-lg font-semibold"
+                  style={{ fontFamily: "var(--font-lexend)" }}
+                >
                   Outbound Travelers
                 </span>
               </Link>

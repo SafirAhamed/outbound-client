@@ -15,7 +15,6 @@ import { useToast } from "@/src/context/ToastContext";
 import PackageDetailsSkeleton from "@/src/skeleton/PackageDetailsSkeleton";
 
 import {
-  ApiResponse,
   PackageDetail,
   TabItem,
 } from "@/types/PackageDetail.types";
@@ -63,7 +62,7 @@ export default function PackageDetailClient({ id }: Props) {
     };
 
     load();
-  }, [id]);
+  }, [id, showToast]);
 
   if (loading) {
     return <PackageDetailsSkeleton />;
@@ -76,6 +75,7 @@ export default function PackageDetailClient({ id }: Props) {
   const tabItems: TabItem[] = [
     { id: "overview", label: "Overview" },
     { id: "itinerary", label: "Itinerary" },
+    { id: "reviews", label: "Reviews", scrollToId: "review" },
   ];
 
   return (
@@ -146,6 +146,9 @@ export default function PackageDetailClient({ id }: Props) {
               />
             </div>
           </Tabs>
+
+          {/* Scroll target for the Reviews tab */}
+          <div id="review" className="scroll-mt-24" />
         </section>
 
         {/* RIGHT SIDEBAR */}
