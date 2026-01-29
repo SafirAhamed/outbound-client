@@ -10,6 +10,7 @@ interface CommonGridProps {
   mobileHeight?: number;
   className?: string;
   heading?: string;
+  viewAllUrl?: string;
 }
 
 const spanDesktop: Record<number, string> = {
@@ -30,10 +31,11 @@ export default function DestinationCollage({
   heading,
   desktopRowHeight = 260,
   mobileHeight = 140,
+  viewAllUrl = "#",
   className = "",
 }: CommonGridProps) {
   return (
-    <Section title={heading} centerTitle titleSize="large" viewAllUrl="#">
+    <Section title={heading} centerTitle titleSize="large" viewAllUrl={viewAllUrl}>
       <div className="mx-auto w-full" style={{ maxWidth: 1180 }}>
         {/* {heading && (
           <div className="mb-4 flex flex-col items-center">

@@ -78,16 +78,18 @@ export default function Home() {
           items={INTERNATIONAL_DESTINATIONS}
           heading="International Destinations"
           className="my-6"
+          viewAllUrl="/destinations?type=international"
         />
 
         <div className="px-4 md:px-6 my-6  max-w-screen-2xl mx-auto">
           <QuoteOne text="Travel far, travel wide, and let the journey change you." />
         </div>
-        <TrendingPackages />
+        <TrendingPackages viewAllUrl="/packages"/>
         <DestinationCollage
           items={DOMESTIC_DESTINATIONS}
           heading="Domestic Destinations"
           className="my-6"
+          viewAllUrl="/destinations?type=domestic"
         />
         <EbookPromoBanner className="max-w-screen-2xl mx-auto px-4 lg:px-6" />
         <CustomerStoriesMosaic />

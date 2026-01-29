@@ -4,13 +4,17 @@ import { packages } from "@/src/data/packages";
 import PackagesSaleMiniCard from "@/src/features/packages/PackageCard";
 import { Package } from "@/types/packages.types";
 
-const TrendingPackages = () => {
+interface TrendingPackagesProps {
+  viewAllUrl?: string;
+}
+
+const TrendingPackages = ({viewAllUrl = "#"}: TrendingPackagesProps) => {
   return (
     <Carousel
       title="Trending Packages"
       items={packages}
       className="px-4 md:px-6  max-w-screen-2xl mx-auto"
-      viewAll="#"
+      viewAll={viewAllUrl}
       renderCard={(item: Package, index: number) => (
         <div key={index} className="min-w-[300px] max-w-[300px] shrink-0">
           <PackagesSaleMiniCard

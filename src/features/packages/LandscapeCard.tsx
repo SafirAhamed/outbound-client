@@ -61,7 +61,7 @@ Please provide more details.`;
     bestFor === "Solo" ? User : bestFor === "Couple" ? Heart : Users;
 
   return (
-    <article className="group/card flex h-56 overflow-hidden shadow-md rounded-xl">
+    <article className="group/card flex h-auto overflow-hidden shadow-md rounded-xl">
       {/* Image */}
       <div className="relative h-full w-1/3 overflow-hidden">
         <Image
@@ -83,7 +83,7 @@ Please provide more details.`;
             {title}
           </h3>
           <StarRating rating={rating} showNumber />
-          <p className="text-sm text-gray-600 mt-2 line-clamp-2">{subtitle}</p>
+          <p className="text-sm text-gray-600 mt-2 line-clamp-1 md:line-clamp-2">{subtitle}</p>
         </div>
 
         <div className="flex justify-between items-end mt-2">

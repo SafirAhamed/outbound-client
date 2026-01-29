@@ -23,7 +23,7 @@ const QuoteOne: React.FC<QuoteOneProps> = ({
       {/* Left decorative flourish */}
       <span
         aria-hidden="true"
-        className="absolute left-6 opacity-30 text-3xl md:text-4xl"
+        className="hidden lg:block absolute left-6 opacity-30 text-3xl md:text-4xl"
         style={{ color: textColor }}
       >
         ❦
@@ -42,7 +42,7 @@ const QuoteOne: React.FC<QuoteOneProps> = ({
 
       <span
         aria-hidden="true"
-        className="absolute right-6 opacity-30 text-3xl md:text-4xl"
+        className="hidden lg:block absolute right-6 opacity-30 text-3xl md:text-4xl"
         style={{ color: textColor }}
       >
         ❦
