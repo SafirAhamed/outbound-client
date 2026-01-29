@@ -15,7 +15,7 @@ export default function About() {
         className="mb-4 bg-[#0c4423]"
       >
         <AboutHeroHeader
-          backgroundImage="https://media.istockphoto.com/id/1192717854/photo/dream-work-portrait-of-young-and-successful-co-workers-in-casual-wear-smiling-at-camera-while.jpg?s=612x612&w=0&k=20&c=M4wk8LqN7cz91equpoc6paB-4DeUXT8GRdN4mIWTeOs="
+          backgroundImage="/images/about/outboundTeam.jpg"
           minHeightClassName="min-h-[100vh]"
         />
       </section>
