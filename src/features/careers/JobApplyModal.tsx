@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "../../context/ToastContext";
+import Button from "@/src/components/common/Button";
 
 interface JobApplyModalProps {
   open: boolean;
@@ -32,6 +35,7 @@ const JobApplyModal: React.FC<JobApplyModalProps> = ({
   });
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -61,8 +65,8 @@ const JobApplyModal: React.FC<JobApplyModalProps> = ({
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    if (formRef.current && !formRef.current.reportValidity()) return;
     setLoading(true);
 
     // Simulate error for demonstration (replace with real validation)
@@ -96,17 +100,23 @@ const JobApplyModal: React.FC<JobApplyModalProps> = ({
           padding: "2rem",
         }}
       >
-        <button
+        <Button
           className="absolute top-3 right-3 text-2xl text-gray-400 hover:text-red-500"
           onClick={onClose}
           aria-label="Close"
         >
           &times;
-        </button>
+        </Button>
         <h2 className="text-xl font-bold text-emerald-700 mb-2 text-center">
           Apply for {jobTitle}
         </h2>
-        <form className="flex flex-col gap-4 mt-4 relative" onSubmit={handleSubmit}>
+        <form
+          ref={formRef}
+          className="flex flex-col gap-4 mt-4 relative"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <input
             name="name"
             type="text"
@@ -249,17 +259,17 @@ const JobApplyModal: React.FC<JobApplyModalProps> = ({
             onChange={handleChange}
             disabled={loading || sent}
           />
-          <button
-            type="submit"
+          <Button
             className="btn bg-emerald-500 text-white hover:bg-emerald-600 font-bold"
             disabled={loading || sent}
+            onClick={handleSubmit}
           >
             {loading ? (
               <span className="loading loading-spinner loading-sm text-white"></span>
             ) : (
               "Submit Application"
             )}
-          </button>
+          </Button>
           {/* Sent Overlay */}
           {sent && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/90 z-20 animate-fade-in">

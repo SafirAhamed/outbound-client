@@ -1,4 +1,5 @@
 import React from "react";
+import CounterButton from "./CounterButton";
 export default function GuestCounter({
   label,
   value,
@@ -6,7 +7,7 @@ export default function GuestCounter({
   min = 0,
   max = 99,
 }: {
-  label: string;
+  label: React.ReactNode;
   value: number;
   setValue: (v: number) => void;
   min?: number;
@@ -14,27 +15,23 @@ export default function GuestCounter({
 }) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-xs font-medium text-slate-600">{label}</span>
+      <span className="text-xs font-medium text-slate-600 flex items-center gap-2">
+        {label}
+      </span>
       <div className="flex items-center gap-2">
-        <button
-          type="button"
+        <CounterButton
+          kind="minus"
           onClick={() => setValue(Math.max(min, value - 1))}
           disabled={value <= min}
-          className="btn btn-xs btn-outline"
-          aria-label={`Decrease ${label}`}
-        >
-          -
-        </button>
+          ariaLabel="Decrease"
+        />
         <span className="w-6 text-center text-sm">{value}</span>
-        <button
-          type="button"
+        <CounterButton
+          kind="plus"
           onClick={() => setValue(Math.min(max, value + 1))}
           disabled={value >= max}
-          className="btn btn-xs btn-outline"
-          aria-label={`Increase ${label}`}
-        >
-          +
-        </button>
+          ariaLabel="Increase"
+        />
       </div>
     </div>
   );

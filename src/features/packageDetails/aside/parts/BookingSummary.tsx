@@ -13,6 +13,7 @@ export default function BookingSummary({
   pricePerPerson,
   adults,
   child,
+  infants = 0,
   start,
   end,
 }: {
@@ -20,16 +21,19 @@ export default function BookingSummary({
   pricePerPerson: number;
   adults: number;
   child: number;
+  infants?: number;
   start?: Date;
   end?: Date;
 }) {
   // From env: adults full (1), children half (0.5) by default
   const adultMultiplier = toNumber(process.env.NEXT_PUBLIC_ADULT_MULTIPLIER, 1);
   const childMultiplier = toNumber(process.env.NEXT_PUBLIC_CHILD_MULTIPLIER, 0.5);
+  const infantMultiplier = toNumber(process.env.NEXT_PUBLIC_INFANT_MULTIPLIER, 0);
 
   const adultTotal = pricePerPerson * adultMultiplier * adults;
   const childTotal = pricePerPerson * childMultiplier * child;
-  const total = adultTotal + childTotal;
+  const infantTotal = pricePerPerson * infantMultiplier * infants;
+  const total = adultTotal + childTotal + infantTotal;
 
   return (
     <div className="rounded-lg bg-slate-50 p-3 text-[11px] text-slate-600 space-y-1">
@@ -40,6 +44,7 @@ export default function BookingSummary({
       <div>
         {adults} adult{adults !== 1 ? "s" : ""}
         {child > 0 && `, ${child} child${child !== 1 ? "ren" : ""}`}
+        {infants > 0 && `, ${infants} infant${infants !== 1 ? "s" : ""}`}
       </div>
       {start && end && (
         <div>

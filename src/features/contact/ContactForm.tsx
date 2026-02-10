@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import Button from "@/src/components/common/Button";
 
 const ContactForm = () => {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -18,8 +20,8 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    if (formRef.current && !formRef.current.reportValidity()) return;
     setLoading(true);
     // Simulate API
     await new Promise((res) => setTimeout(res, 1200));
@@ -32,7 +34,13 @@ const ContactForm = () => {
   return (
     <div className="bg-white/90 rounded-2xl shadow-lg p-8 w-full max-w-xl mx-auto">
       <h2 className="text-2xl font-bold text-emerald-700 mb-4">Send us a Message</h2>
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <form
+        ref={formRef}
+        className="flex flex-col gap-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <input
           name="name"
           type="text"
@@ -62,17 +70,17 @@ const ContactForm = () => {
           onChange={handleChange}
           disabled={loading}
         />
-        <button
-          type="submit"
+        <Button
           className="btn bg-emerald-500 text-white hover:bg-emerald-600 font-bold"
           disabled={loading}
+          onClick={handleSubmit}
         >
           {loading ? (
             <span className="loading loading-spinner loading-sm text-white"></span>
           ) : (
             "Send Message"
           )}
-        </button>
+        </Button>
         {sent && (
           <div className="text-emerald-600 text-center font-semibold mt-2">
             Thank you! We’ll get back to you soon.

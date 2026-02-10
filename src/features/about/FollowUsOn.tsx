@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { useToast } from "@/src/context/ToastContext";
+import Button from "@/src/components/common/Button";
 
 const SOCIALS = [
   {
@@ -47,11 +48,12 @@ const SOCIALS = [
 const FollowUsOn = () => {
   const [loading, setLoading] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const { showToast } = useToast();
 
   // Simulate async subscribe
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubscribe = async () => {
+    if (formRef.current && !formRef.current.reportValidity()) return;
     setLoading(true);
 
     const email = emailRef.current?.value || "";
@@ -103,7 +105,13 @@ const FollowUsOn = () => {
           <p className="text-gray-600 text-center mb-4 text-base">
             Get the best travel stories, tips, and exclusive offers delivered to your inbox.
           </p>
-          <form className="flex w-full gap-2" onSubmit={handleSubscribe}>
+          <form
+            ref={formRef}
+            className="flex w-full gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <input
               type="email"
               required
@@ -112,17 +120,17 @@ const FollowUsOn = () => {
               className="flex-1 px-4 py-2 rounded-l-full border border-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               disabled={loading}
             />
-            <button
-              type="submit"
+            <Button
               className="px-6 py-2 rounded-r-full bg-emerald-500 text-white font-bold hover:bg-emerald-600 transition flex items-center justify-center min-w-[110px]"
               disabled={loading}
+              onClick={handleSubscribe}
             >
               {loading ? (
                 <span className="loading loading-spinner loading-sm text-white"></span>
               ) : (
                 "Subscribe"
               )}
-            </button>
+            </Button>
           </form>
         </div>
       </div>
