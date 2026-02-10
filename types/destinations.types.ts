@@ -1,22 +1,23 @@
 export type DestinationCategory = "INTERNATIONAL" | "DOMESTIC";
 
-export type DestinationItem = {
-  id: string;
-  place: string;
-  type: DestinationCategory;
-  images: string[];
-  country: string;
-  amount: number;
-  highlights: string[];
-  isActive: boolean;
-};
-
-export interface DestinationGrid {
-  id: string;
+export interface DestinationCardItem {
+  _id: string;
   title: string;
   subtitle?: string;
   imageSrc: string;
-  href?: string;
+  destination?: string;
+  showOverlay?: boolean;
+  priceFrom?: string | number;
+  sizeMobile?: number;
+  sizeDesktop?: number;
+}
+
+export interface DestinationGrid {
+  _id: string;
+  title: string;
+  subtitle?: string;
+  imageSrc: string;
+  destination?: string;
   showOverlay?: boolean;
   priceFrom?: string | number;
   sizeMobile?:number;
@@ -25,11 +26,11 @@ export interface DestinationGrid {
 
 
 export interface Destination {
-  id: string;
+  _id: string;
   title: string;
   subtitle?: string;
   imageSrc: string;
-  href?: string;
+  destination?: string;
   showOverlay?: boolean;
   priceFrom?: string | number;
   sizeMobile?:number;
@@ -37,7 +38,7 @@ export interface Destination {
 }
 
 export interface DestinationCardProps {
-  item: Destination;
+  item: DestinationCardItem;
   mobileHeight: number;
   desktopHeight: number;
   className?: string;

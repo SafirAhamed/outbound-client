@@ -85,52 +85,52 @@ const OVERLAY_CLASSES: Record<OverlayToken, string> = {
 export default function HeroBanner({ data, className = "" }: HeroBannerProps) {
   const { state } = useAppData();
 
-  const hero = SAMPLE_BANNER as HeroBannerType;
-  const d = hero.design;
+  const hero = data || state.homePage?.heroBanner;
+  const d = hero?.design;
 
-  const paddingToken: PaddingToken | undefined = d.padding ?? d.boxPaddingSize;
-  const overlayToken: OverlayToken | undefined = d.overlay ?? d.overlayStrength;
+  const paddingToken: PaddingToken | undefined = d?.padding ?? d?.boxPaddingSize;
+  const overlayToken: OverlayToken | undefined = d?.overlay ?? d?.overlayStrength;
 
   const boxPaddingClasses =
     (paddingToken && BOX_PADDING_CLASSES[paddingToken]) ||
-    d.boxPaddingClass ||
+    d?.boxPaddingClass ||
     "";
 
   const positionClasses =
-    d.positionClasses ??
+    d?.positionClasses ??
     "flex flex-col justify-center items-center text-center";
   const hasDisplayMode = /(^|\s)(flex|inline-flex|grid|inline-grid)\b/.test(
     positionClasses,
   );
 
   const overlayClasses =
-    (overlayToken && OVERLAY_CLASSES[overlayToken]) || d.overlayClass || "";
+    (overlayToken && OVERLAY_CLASSES[overlayToken]) || d?.overlayClass || "";
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [videoReady, setVideoReady] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
-  const title = d.title || hero.contentTitle;
-  const subTitle = d.subTitle || hero.contentText;
+  const title = d?.title || hero?.contentTitle;
+  const subTitle = d?.subTitle || hero?.contentText;
 
   const fontStyle = useMemo(() => {
-    if (!d.fontFamily) return undefined;
-    return { fontFamily: d.fontFamily } as const;
-  }, [d.fontFamily]);
+    if (!d?.fontFamily) return undefined;
+    return { fontFamily: d?.fontFamily } as const;
+  }, [d?.fontFamily]);
 
   // Load external font stylesheet if provided (admin-driven)
   useEffect(() => {
-    if (!d.fontUrl) return;
+    if (!d?.fontUrl) return;
 
-    const id = `hero-font-${encodeURIComponent(d.fontUrl)}`;
+    const id = `hero-font-${encodeURIComponent(d?.fontUrl)}`;
     if (document.getElementById(id)) return;
 
     const link = document.createElement("link");
     link.id = id;
     link.rel = "stylesheet";
-    link.href = d.fontUrl;
+    link.href = d?.fontUrl;
     document.head.appendChild(link);
-  }, [d.fontUrl]);
+  }, [d?.fontUrl]);
 
   // Try to autoplay (some browsers block; muting helps)
   useEffect(() => {
@@ -149,16 +149,16 @@ export default function HeroBanner({ data, className = "" }: HeroBannerProps) {
   return (
     <section
       className={`relative overflow-hidden w-full ${
-        d.heightClass ?? ""
+        d?.heightClass ?? ""
       } ${className}`}
       style={fontStyle}
     >
       {/* Background media */}
       <div className="absolute inset-0">
         {/* Fallback image until video is ready (or if video errors) */}
-        {d.fallbackImage && (!videoReady || videoError) && (
+        {d?.fallbackImage && (!videoReady || videoError) && (
           <Image
-            src={d.fallbackImage}
+            src={d?.fallbackImage}
             alt=""
             fill
             sizes="100vw"
@@ -167,7 +167,7 @@ export default function HeroBanner({ data, className = "" }: HeroBannerProps) {
           />
         )}
 
-        {!videoError && d.videoSources?.length > 0 && (
+        {!videoError && (d?.videoSources?.length ?? 0) > 0 && (
           <video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
@@ -176,12 +176,12 @@ export default function HeroBanner({ data, className = "" }: HeroBannerProps) {
             muted
             playsInline
             preload="auto"
-            poster={d.fallbackImage}
+            poster={d?.fallbackImage}
             onLoadedData={() => setVideoReady(true)}
             onPlaying={() => setVideoReady(true)}
             onError={() => setVideoError(true)}
           >
-            {d.videoSources.map((s) => (
+            {d?.videoSources?.map((s) => (
               <source key={s.src} src={s.src} type={s.type} />
             ))}
           </video>
@@ -199,20 +199,20 @@ export default function HeroBanner({ data, className = "" }: HeroBannerProps) {
           className={`h-full w-full ${positionClasses}`}
           style={hasDisplayMode ? undefined : ({ display: "flex" } as const)}
         >
-          <div className={`${d.boxBgClass ?? ""} ${boxPaddingClasses}`}>
+          <div className={`${d?.boxBgClass ?? ""} ${boxPaddingClasses}`}>
             <SlideUpReveal delayMs={200}>
               {title && (
                 <h1
-                  className={d.titleClasses}
+                  className={d?.titleClasses}
                   style={
-                    d.titleColorHex ? { color: d.titleColorHex } : undefined
+                    d?.titleColorHex ? { color: d?.titleColorHex } : undefined
                   }
                 >
                   {title}
 
                   <span className="text-rotate font-inherit text-inherit leading-inherit">
                     <span>
-                      {d.rotatedText?.map((word, index) => (
+                      {d?.rotatedText?.map((word, index) => (
                         <span key={word}>{word}</span>
                       ))}
                     </span>
@@ -232,10 +232,10 @@ export default function HeroBanner({ data, className = "" }: HeroBannerProps) {
             <SlideUpReveal delayMs={400}>
               {subTitle && (
                 <div
-                  className={d.subTitleClasses}
+                  className={d?.subTitleClasses}
                   style={
-                    d.subTitleColorHex
-                      ? { color: d.subTitleColorHex }
+                    d?.subTitleColorHex
+                      ? { color: d?.subTitleColorHex }
                       : undefined
                   }
                 >

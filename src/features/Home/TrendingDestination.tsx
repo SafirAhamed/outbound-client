@@ -25,7 +25,7 @@ export default function TrendingDestination() {
         {/* Background image */}
         <div className="absolute inset-0 pointer-events-none">
             <Image
-              src="https://static.vecteezy.com/system/resources/thumbnails/065/660/398/small/paper-air-plane-icon-with-a-dotted-route-line-online-message-symbol-travel-journey-or-trip-concept-delivery-idea-or-creativity-sign-isolated-on-white-background-graphic-illustration-vector.jpg"
+              src="/images/paperplaneVector.jpg"
               alt=""
               // fill
               width={800}

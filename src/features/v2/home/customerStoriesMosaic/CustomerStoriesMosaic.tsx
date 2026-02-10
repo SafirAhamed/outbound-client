@@ -8,16 +8,17 @@ import CustomerStoriesMosaicBackground from "./components/CustomerStoriesMosaicB
 import CustomerStoriesMosaicHeader from "./components/CustomerStoriesMosaicHeader";
 import CustomerStoriesMosaicCarousel from "./components/CustomerStoriesMosaicCarousel";
 import useResponsivePageSize from "@/src/hooks/useResponsivePageSize";
+import { useAppData } from "@/src/context/AppDataContext";
 
 export default function CustomerStoriesMosaic({
-  stories = CUSTOMER_STORIES,
   heading = "Customer Happy Stories",
   subheading = "A few real moments from real travelers",
 }: {
-  stories?: CustomerStory[];
   heading?: string;
   subheading?: string;
 }) {
+  const {state} = useAppData();
+  const stories = state.homePage?.customerStories || CUSTOMER_STORIES;
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const [page, setPage] = useState(0);
   const pageSize = useResponsivePageSize({

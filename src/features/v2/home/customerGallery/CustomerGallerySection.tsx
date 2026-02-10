@@ -1,20 +1,23 @@
 "use client";
 import MarqueeStrip from "@/src/components/common/marquee/MarqueeStrip";
-import { MarqueeItem } from "@/types/marquee";
+import { useAppData } from "@/src/context/AppDataContext";
+import { CUSTOMER_GALLERY_ROW1 } from "@/src/data/customerGallery";
 import Image from "next/image";
 
 interface CustomerGallerySectionProps {
-  row1: MarqueeItem[];
-  row2: MarqueeItem[];
   className?: string;
 }
 
 export default function CustomerGallerySection({
-  row1,
-  row2,
   className = "",
 }: CustomerGallerySectionProps) {
-  if (!row1?.length && !row2?.length) return null;
+  const {state} = useAppData();
+  const CTA_TEXT = {
+    title: state.homePage?.customerGallery?.ctaText?.title || "Happy Customers",
+    subtitle: state.homePage?.customerGallery?.ctaText?.subtitle || "Moments shared from recent journeys. Real places. Real smiles.",
+  }
+  const customerGallery = state.homePage?.customerGallery?.galleryItems || CUSTOMER_GALLERY_ROW1;
+  if (!customerGallery?.length ) return null;
 
   const bottomH = "22vh";
 
@@ -25,7 +28,7 @@ export default function CustomerGallerySection({
           <div className="absolute inset-0 -z-10 opacity-40 mask-[radial-gradient(circle_at_center,white,transparent)] " />
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#052210]">
             {/* drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] */}
-            Happy Customers
+            {CTA_TEXT.title}
           </h2>
           <div className="mt-2 flex justify-center">
             <Image
@@ -38,12 +41,12 @@ export default function CustomerGallerySection({
             />
           </div>
           <p className="mt-3 text-sm md:text-base text-black/70 max-w-xl text-center">
-            Moments shared from recent journeys. Real places. Real smiles.
+            {CTA_TEXT.subtitle}
           </p>
         </div>
 
         <MarqueeStrip
-          items={row1}
+          items={customerGallery}
           speed="slow"
           direction="left"
           pauseOnHover

@@ -1,11 +1,12 @@
 "use client";
-import { DestinationGrid } from "@/types/destinations.types";
-import React from "react";
+import React, { use } from "react";
 import DestinationCard from "../slidesAndCards/DestinationCard";
 import Section from "../layout/Section";
+import { useAppData } from "@/src/context/AppDataContext";
+import { DestinationCardItem } from "@/types/destinations.types";
 
 interface CommonGridProps {
-  items: DestinationGrid[];
+  type: string;
   desktopRowHeight?: number;
   mobileHeight?: number;
   className?: string;
@@ -27,13 +28,18 @@ const spanMobile: Record<number, string> = {
 };
 
 export default function DestinationCollage({
-  items,
+  type,
   heading,
   desktopRowHeight = 260,
   mobileHeight = 140,
   viewAllUrl = "#",
   className = "",
 }: CommonGridProps) {
+  const {state} = useAppData();
+const items: DestinationCardItem[] =
+  type === "international"
+    ? (state.homePage?.internationalDestinations ?? [])
+    : (state.homePage?.domesticDestinations ?? []);
   return (
     <Section title={heading} centerTitle titleSize="large" viewAllUrl={viewAllUrl}>
       <div className="mx-auto w-full" style={{ maxWidth: 1180 }}>
@@ -49,7 +55,7 @@ export default function DestinationCollage({
             const mobileCls = spanMobile[item.sizeMobile || 6];
             const desktopCls = spanDesktop[Math.round(item.sizeDesktop || 4)];
             return (
-              <div key={item.id} className={`${mobileCls} ${desktopCls}`}>
+              <div key={item._id} className={`${mobileCls} ${desktopCls}`}>
                 <DestinationCard
                   item={item}
                   mobileHeight={mobileHeight}

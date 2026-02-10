@@ -61,32 +61,30 @@ export default function Home() {
         <HeroBanner />
         <TrendingDestination />
         <CompanyStats />
-        <VideoCard config={VIDEO_CARD_FEATURE} />
+        <VideoCard />
         <Exclusive />
         <div className="px-4 md:px-6 my-6 max-w-screen-2xl mx-auto">
-          <QuoteOne text="Travel far, travel wide, and let the journey change you." />
+          <QuoteOne value={1} />
         </div>
         <PlanYourTripSection />
         <CustomerGallerySection
-          row1={CUSTOMER_GALLERY_ROW1}
-          row2={CUSTOMER_GALLERY_ROW2}
           className="p-10 bg-[#FBF9F6] max-w-screen-2xl mx-auto overflow-hidden"
         />
         {/* <VisualTrustSection />
         <TripStylesSection /> */}
         <DestinationCollage
-          items={INTERNATIONAL_DESTINATIONS}
+          type="international"
           heading="International Destinations"
           className="my-6"
           viewAllUrl="/destinations?type=international"
         />
 
         <div className="px-4 md:px-6 my-6  max-w-screen-2xl mx-auto">
-          <QuoteOne text="Travel far, travel wide, and let the journey change you." />
+          <QuoteOne value={2} />
         </div>
         <TrendingPackages viewAllUrl="/packages"/>
         <DestinationCollage
-          items={DOMESTIC_DESTINATIONS}
+          type="domestic"
           heading="Domestic Destinations"
           className="my-6"
           viewAllUrl="/destinations?type=domestic"

@@ -3,14 +3,16 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Globe2, Users, Handshake, Heart } from "lucide-react";
-import { COMPANY_STATS, COMPANY_STATS_SECTION, StatItem } from "@/src/data/companyStats";
+import { useAppData } from "@/src/context/AppDataContext";
+import { CompanyStatsCard } from "@/types/homePage.types";
+import { COMPANY_STATS, COMPANY_STATS_SECTION } from "@/src/data/companyStats";
 
 interface CompanyStatsProps {
   className?: string;
   titleClassName?: string;
   hideTitle?: boolean;
   titleText?: string;
-  descriptionText?: string; // new
+  descriptionText?: string;
 }
 
 const iconMap = { Globe2, Users, Handshake, Heart };
@@ -44,7 +46,7 @@ function useCountUp(target: number, durationMs = 1400) {
   return { value, ref };
 }
 
-function StatCard({ stat }: { stat: StatItem }) {
+function StatCard({ stat }: { stat: CompanyStatsCard }) {
   const { value, ref } = useCountUp(stat.value);
   const Icon = iconMap[stat.icon as IconName];
   const display =
@@ -76,13 +78,13 @@ export default function CompanyStats({
   className = "",
   titleClassName = "",
   hideTitle = false,
-  titleText,
-  descriptionText,
 }: CompanyStatsProps) {
-  const resolvedTitle = titleText ?? COMPANY_STATS_SECTION.defaultTitle;
-  const resolvedDescription =
-    descriptionText ?? COMPANY_STATS_SECTION.defaultDescription;
+  const { state } = useAppData();
+  const resolvedTitle = state?.homePage?.companyStats?.companyStatsSection?.title ?? COMPANY_STATS_SECTION.defaultTitle;
+  const resolvedDescription = state?.homePage?.companyStats?.companyStatsSection?.description ?? COMPANY_STATS_SECTION.defaultDescription;
+  const stats = state?.homePage?.companyStats?.companyStatsCards as CompanyStatsCard[] ?? COMPANY_STATS;
 
+  // Prefer dynamic data from state, fallback to []
   return (
     <section
       className={`relative max-w-screen-2xl mx-auto py-14 lg:py-20 bg-[#FBF9F6] overflow-hidden ${className}`}
@@ -113,7 +115,7 @@ export default function CompanyStats({
         )}
         <div className="flex justify-center">
           <div className="w-full lg:w-3/4 mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {COMPANY_STATS.map((s) => (
+            {stats.map((s) => (
               <StatCard key={s.id} stat={s} />
             ))}
           </div>

@@ -44,7 +44,7 @@ export const AppDataProvider = ({ children }: { children: React.ReactNode }) => 
   const setHomePage = (data: HomePage) => {
     dispatch({ type: "SET_HOME_PAGE", payload: data });
   };
-
+console.log("AppDataContext State:", state);
   return (
     <AppDataContext.Provider value={{ state, dispatch, setHomePage }}>
       {children}

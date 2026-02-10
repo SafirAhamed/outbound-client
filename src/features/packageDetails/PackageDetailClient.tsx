@@ -95,6 +95,29 @@ export default function PackageDetailClient({ id }: Props) {
         </SlideUpReveal>
       </section>
 
+      {/* BookingAside for mobile (top) */}
+      <div className="block lg:hidden mt-8">
+        <SlideUpReveal delayMs={200}>
+          <BookingAside
+            pricing={{
+              original: data.booking_details.original_price,
+              discounted: data.booking_details.discounted_price,
+            }}
+            packageTitle={data.title}
+            days={data.meta.days}
+            nights={data.meta.nights}
+            perLabel={data.booking_details.person_label}
+            includes={data.booking_details.includes}
+            cancellationNote={data.booking_details.cancellation_note}
+            instant_confirm={data.booking_details.instant_confirm}
+            support={data.booking_details.support}
+            ctaLabel={data.booking_details.cta_button}
+            seoUrl={data.seo_url}
+            price_type={data.booking_details.price_type}
+          />
+        </SlideUpReveal>
+      </div>
+
       {/* BODY LAYOUT */}
       <div className="mt-10 grid gap-6 lg:grid-cols-6">
         {/* LEFT CONTENT */}
@@ -151,8 +174,8 @@ export default function PackageDetailClient({ id }: Props) {
           <div id="review" className="scroll-mt-24" />
         </section>
 
-        {/* RIGHT SIDEBAR */}
-        <aside className="w-full self-start lg:sticky lg:top-4 lg:col-span-2">
+        {/* BookingAside for desktop (sidebar) */}
+        <aside className="w-full self-start hidden lg:sticky lg:top-4 lg:col-span-2 lg:block">
           <SlideUpReveal delayMs={200}>
             <BookingAside
               pricing={{

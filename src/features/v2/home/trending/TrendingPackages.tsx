@@ -1,5 +1,6 @@
 "use client";
 import Carousel from "@/src/components/common/carousel/Carousel";
+import { useAppData } from "@/src/context/AppDataContext";
 import { packages } from "@/src/data/packages";
 import PackagesSaleMiniCard from "@/src/features/packages/PackageCard";
 import { Package } from "@/types/packages.types";
@@ -9,17 +10,19 @@ interface TrendingPackagesProps {
 }
 
 const TrendingPackages = ({viewAllUrl = "#"}: TrendingPackagesProps) => {
+  const {state} = useAppData();
+  
+  const trendingPackages = state.homePage?.trendingPackages;
   return (
     <Carousel
       title="Trending Packages"
-      items={packages}
+      items={trendingPackages || []}
       className="px-4 md:px-6  max-w-screen-2xl mx-auto"
       viewAll={viewAllUrl}
-      renderCard={(item: Package, index: number) => (
-        <div key={index} className="min-w-[300px] max-w-[300px] shrink-0">
+      renderCard={(item: Package) => (
+        <div key={item._id} className="min-w-[300px] max-w-[300px] shrink-0">
           <PackagesSaleMiniCard
-            id={item.link}
-            image={item.image}
+            thumbnail={item.thumbnail}
             title={item.title}
             rating={item.rating}
             subtitle={item.description}
@@ -27,11 +30,11 @@ const TrendingPackages = ({viewAllUrl = "#"}: TrendingPackagesProps) => {
             nights={item.nights}
             bestFor={item.bestFor}
             price={item.price}
-            link={item.link}
+            link={`/package/${item._id}`}
             portrait
             detailed
-            original_price={item.originalPrice}
-            discounted_price={item.discountedPrice}
+            original_price={item.original_price}
+            discounted_price={item.discounted_price}
           />
         </div>
       )}

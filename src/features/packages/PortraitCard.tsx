@@ -10,7 +10,7 @@ import { PackagesCardItem } from "@/types/packages.types";
 import { Heart, Phone, User, Users } from "lucide-react";
 
 const PortraitCard: React.FC<PackagesCardItem> = ({
-  image,
+  thumbnail,
   title,
   subtitle,
   rating,
@@ -54,7 +54,7 @@ Please provide more details.`;
     <article className="group/card rounded-xl shadow-md overflow-hidden flex flex-col">
       <div className="relative w-full h-56 overflow-hidden">
         <Image
-          src={image}
+          src={thumbnail}
           alt={title}
           fill
           className="object-cover transition-transform duration-500 group-hover/card:scale-110"

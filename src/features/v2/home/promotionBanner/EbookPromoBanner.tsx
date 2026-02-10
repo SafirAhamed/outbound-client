@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { EBOOK_PROMO } from "@/src/data/companyStats";
 import Section from "@/src/components/common/layout/Section";
+import { useAppData } from "@/src/context/AppDataContext";
 
 interface EbookPromoBannerProps {
   className?: string;
@@ -11,8 +11,15 @@ interface EbookPromoBannerProps {
 
 export default function EbookPromoBanner({ className = "" }: EbookPromoBannerProps) {
   const router = useRouter();
+  const {state} = useAppData();
 
-  const c = EBOOK_PROMO.colors || {};
+  const EBOOK_PROMO = state.homePage?.ebookPromo;
+
+  console.log("EBOOK_PROMO", EBOOK_PROMO);
+
+
+
+  const c = EBOOK_PROMO?.colors || {};
   const {
     title,
     subtitle,
@@ -43,8 +50,8 @@ export default function EbookPromoBanner({ className = "" }: EbookPromoBannerPro
         style={{ borderColor: border, backgroundColor: accentBg }}
       >
         <Image
-          src={EBOOK_PROMO.image}
-          alt={EBOOK_PROMO.title}
+          src={EBOOK_PROMO?.image || "/images/ebookbannerplaceholder.jpg"}
+          alt={EBOOK_PROMO?.title || ""}
           fill
           sizes="(max-width: 1024px) 100vw, 100vw"
           className="object-cover opacity-80"
@@ -58,25 +65,25 @@ export default function EbookPromoBanner({ className = "" }: EbookPromoBannerPro
         />
         <div className="relative h-full flex flex-col justify-end p-6 sm:p-8">
           <h3 className="text-lg sm:text-2xl font-semibold" style={{ color: title }}>
-            {EBOOK_PROMO.title}
+            {EBOOK_PROMO?.title}
           </h3>
           <p
             className="mt-1 text-xs sm:text-sm font-medium uppercase tracking-wide"
             style={{ color: subtitle }}
           >
-            {EBOOK_PROMO.subtitle}
+            {EBOOK_PROMO?.subtitle}
           </p>
             <p
             className="mt-3 text-xs sm:text-sm leading-relaxed line-clamp-5"
             style={{ color: description }}
           >
-            {EBOOK_PROMO.description}
+            {EBOOK_PROMO?.description}
           </p>
           <div className="mt-5">
             <button
               type="button"
               onClick={() => {
-                const href = EBOOK_PROMO.href;
+                const href = EBOOK_PROMO?.href || "";
                 const isExternal = /^https?:\/\//i.test(href);
                 if (isExternal) {
                   window.location.assign(href);
@@ -91,7 +98,7 @@ export default function EbookPromoBanner({ className = "" }: EbookPromoBannerPro
                 boxShadow: "0 1px 2px rgba(0,0,0,0.08)",
               }}
             >
-              {EBOOK_PROMO.cta}
+              {EBOOK_PROMO?.cta}
               <span aria-hidden="true">→</span>
             </button>
           </div>

@@ -16,7 +16,7 @@ export const COMPANY_STATS: StatItem[] = [
 export const COMPANY_STATS_SECTION = {
   defaultTitle: "Why choose outbound travelers?",
   defaultDescription:
-    "Why We're Your Perfect Travel Partner. Lorem ipsum dolor sit amet consectetur. Vitae blandit eu etiam urna odio risus maecenas mauris.",
+    "Why We’re Your Perfect Travel Partner Thoughtfully crafted journeys, expert planning, and complete travel support designed around you.",
 };
 
 export interface EbookPromo {

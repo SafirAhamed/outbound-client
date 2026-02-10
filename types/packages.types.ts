@@ -1,6 +1,5 @@
 export interface PackagesCardItem {
-  id: string;
-  image: string;
+  thumbnail: string;
   title: string;
   subtitle: string;
   rating: number;
@@ -19,7 +18,8 @@ export interface PackagesCardItem {
 }
 
 export interface Package {
-  image: string;
+  _id: string;
+  thumbnail: string;
   title: string;
   description: string;
   rating: number;
@@ -28,6 +28,6 @@ export interface Package {
   bestFor?: "Couple" | "Friends" | "Solo" | "Family" | "Group";
   price: string;
   link: string;
-  originalPrice?: string;
-  discountedPrice?: string;
+  original_price?: string;
+  discounted_price?: string;
 }

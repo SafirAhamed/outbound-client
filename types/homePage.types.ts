@@ -1,4 +1,15 @@
+import { ContentPosition } from "@/src/features/v2/home/exclusiveOffers/ExclusiveOfferSlide";
+import { SlideItem } from "./carousel.types";
+import { LucideIcon } from "lucide-react";
+import { LucideIconName } from "@/src/features/v2/home/PlanYourTripSection";
+import { MarqueeItem } from "./marquee";
+import { DestinationCardItem } from "./destinations.types";
+import { Package } from "./packages.types";
+import { EbookPromo } from "@/src/data/companyStats";
+import { CustomerStory } from "./customer.types";
+
 export interface VideoSource {
+  _id?: string;
   src: string;
   type: string;
 }
@@ -82,11 +93,27 @@ export interface TopCelebrities {
 export interface VideoCardData {
   id: string;
   poster: string;
+  videoSrc?: string;
   videoSources: VideoSource[];
-  size: {
-    height: string;
-    minHeight: string;
+  heading?: string;
+  subheading?: string;
+  description?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  colors?: {
+    heading?: string;
+    subheading?: string;
+    description?: string;
+    ctaBg?: string;
+    ctaText?: string;
+    overlayFrom?: string;
+    overlayTo?: string;
   };
+  size?: {
+    height?: string;
+    minHeight?: string;
+  };
+  align?: string;
 }
 
 export interface BookYourTicketsSection {
@@ -103,24 +130,33 @@ export interface ClientImageCardProps {
   alt?: string;
 }
 
+export interface CompanyStatsSection {
+  title: string;
+  description: string;
+}
+
+export interface CompanyStatsCard {
+  id: string;
+  label: string;
+  value: number;
+  suffix: string;
+  icon: "Globe2" | "Users" | "Handshake" | "Heart";
+}
+
 export interface CompanyStats {
-  left: {
-    label: string;
-    value: number;
-  };
-  right: {
-    label: string;
-    value: number;
-  };
-  bgImg?: string; 
-};
+  companyStatsSection: CompanyStatsSection;
+  companyStatsCards: CompanyStatsCard[];
+  bgImg?: string;
+}
 
 export interface Testimonial {
   id: string;
   name: string;
+  avatar: string;
+  rating: 5;
+  date: string;
+  title: string;
   text: string;
-  image: string;
-  align: "left" | "right";
 }
 
 export interface CommunityBanner {
@@ -131,16 +167,64 @@ export interface CommunityBanner {
   whatsappLink: string;
 }
 
+export type ExclusiveSlide = SlideItem & {
+  contentPosition?: ContentPosition;
+  overlay?: "none" | "20" | "30" | "40" | "60" | "light" | "medium" | "dark";
+};
+
+export interface PlanYourTripTrustPoint {
+  icon: LucideIconName;
+  label: string;
+}
+
+export interface PlanYourTripCta {
+  label: string;
+  href: string;
+  icon?: LucideIconName;
+}
+
+export interface PlanYourTripStep {
+  icon: LucideIconName;
+  title: string;
+  description: string;
+}
+
+export interface PlanYourTrip {
+  badgeText: string;
+  title: string;
+  description: string;
+  trustPoints: PlanYourTripTrustPoint[];
+  primaryCta: PlanYourTripCta;
+  secondaryCta: PlanYourTripCta;
+  steps: PlanYourTripStep[];
+}
+
+export type customerGallery = {
+  ctaText: {
+    title: string;
+    subtitle: string;
+  };
+  galleryItems: MarqueeItem[]
+}
+
+
 export interface HomePage {
   heroBanner: HeroBanner;
   trendingDestinations: DestinationCard[];
-  topCelebrities: TopCelebrities;
-  internationalDestinations: DestinationCard[];
-  domesticDestinations: DestinationCard[];
-  videoCardData: VideoCardData;
-  bookYourTicketsSection: BookYourTicketsSection;
-  ourClients: ClientImageCardProps[];
   companyStats: CompanyStats;
+  topCelebrities: TopCelebrities;
+  videoCardData: VideoCardData;
+  exclusiveOffers: ExclusiveSlide[];
+  quotes: string[];
+  planYourTrip: PlanYourTrip;
+  customerGallery: customerGallery;
+  internationalDestinations: DestinationCardItem[];
+  trendingPackages: Package[];
+  domesticDestinations: DestinationCardItem[];
+  ebookPromo: EbookPromo;
+  bookYourTicketsSection: BookYourTicketsSection;
+  faqs: { question: string; answer: string }[];
+  customerStories: CustomerStory[];
   testimonials: Testimonial[];
   communityBanner: CommunityBanner;
 }

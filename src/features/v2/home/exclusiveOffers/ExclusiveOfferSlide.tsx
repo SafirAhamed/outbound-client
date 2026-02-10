@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import type { SlideItem } from "@/types/carousel.types";
+import { ExclusiveSlide } from "@/types/homePage.types";
 
 export type ContentPosition =
   | "top-left"
@@ -14,10 +15,6 @@ export type ContentPosition =
   | "bottom-center"
   | "bottom-right";
 
-export type ExclusiveSlide = SlideItem & {
-  contentPosition?: ContentPosition;
-  overlay?: "none" | "20" | "30" | "40" | "60" | "light" | "medium" | "dark";
-};
 
 const POSITION_WRAPPER_CLASSES: Record<
   ContentPosition,

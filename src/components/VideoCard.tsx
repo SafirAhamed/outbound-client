@@ -3,13 +3,16 @@
 import { VideoCardConfig } from "@/types/homePage.types";
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
+import { useAppData } from "../context/AppDataContext";
 
 interface VideoCardProps {
-  config: VideoCardConfig;
+  // config: VideoCardConfig;
   className?: string;
 }
 
-export default function VideoCard({ config, className = "" }: VideoCardProps) {
+export default function VideoCard({ className = "" }: VideoCardProps) {
+
+  const { state } = useAppData();
   const {
     videoSrc,
     videoSources,
@@ -22,7 +25,7 @@ export default function VideoCard({ config, className = "" }: VideoCardProps) {
     colors,
     size,
     align = "center",
-  } = config;
+  } = state.homePage?.videoCardData || {};
 
   const {
     heading: headingColor = "#111827",
@@ -87,7 +90,7 @@ export default function VideoCard({ config, className = "" }: VideoCardProps) {
       v.removeEventListener("loadeddata", onLoaded);
       v.removeEventListener("playing", onLoaded);
     };
-  }, []);
+  }, [videoSrc, videoSources]);
 
   const alignmentClasses =
     align === "left"

@@ -1,20 +1,28 @@
 "use client";
 
+import { useAppData } from "@/src/context/AppDataContext";
 import React from "react";
 
 interface QuoteOneProps {
-  text: string;
   bgColor?: string;
   textColor?: string;
   font?: string;
+  value: number;
 }
 
 const QuoteOne: React.FC<QuoteOneProps> = ({
-  text,
   bgColor = "#E8E8E8",
   textColor = "var(--color-primary)",
-  font = "var(--font-amaranth)"
+  font = "var(--font-amaranth)",
+  value,
 }) => {
+  const { state } = useAppData();
+  const textArr: string[] = state.homePage?.quotes || [
+    "Travel far, travel wide, and let the journey change you.",
+    "The world is a book, and those who do not travel read only one page.",
+    "Adventure awaits beyond the horizon; go find it.",
+    "Collect moments, not things, and let your soul wander.",
+  ];
   return (
     <div
       className="w-full py-6 px-4 flex items-center justify-center relative overflow-hidden rounded-lg tracking-[0.60]"
@@ -37,7 +45,7 @@ const QuoteOne: React.FC<QuoteOneProps> = ({
           opacity: 0.8,
         }}
       >
-        {text}
+        {textArr[value - 1]}
       </p>
 
       <span

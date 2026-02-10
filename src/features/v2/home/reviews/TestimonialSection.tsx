@@ -6,6 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import StepIndicator from "@/src/components/common/StepIndicator";
 import TestimonialCardHome from "./TestimonialCardHome";
+import { useAppData } from "@/src/context/AppDataContext";
 
 const DOODLE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
   <g fill="none" stroke="white" stroke-opacity="0.14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -36,55 +37,9 @@ const DOODLE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="220" height="
 
 const DOODLE_BG = `url("data:image/svg+xml,${encodeURIComponent(DOODLE_SVG)}")`;
 
-const testimonials = [
-  {
-    id: "1",
-    name: "Vecna",
-    avatar: "https://static.wikia.nocookie.net/strangerthings8338/images/8/8b/Vecna_S4.jpg/revision/latest/scale-to-width-down/1000?cb=20230819085138",
-    rating: 5,
-    date: "2 weeks ago",
-    title: "Best Travel Experience!",
-    text: "The team handled everything perfectly. Highly recommended for international trips. Will definitely book again!",
-  },
-  {
-    id: "2",
-    name: "Henry Creel",
-    avatar: "https://static.wikia.nocookie.net/strangerthings8338/images/6/6a/Henry_Creel_portrait_2.png/revision/latest/scale-to-width-down/1000?cb=20230903101543",
-    rating: 5,
-    date: "1 month ago",
-    title: "Loved the Service",
-    text: "Loved the itinerary and the support throughout our journey. The staff was very helpful and responsive.",
-  },
-  {
-    id: "3",
-    name: "Young Henry Creel",
-    avatar: "https://static.wikia.nocookie.net/strangerthings8338/images/6/6c/Young_Henry_Creel_2.png/revision/latest?cb=20221102234158",
-    rating: 4,
-    date: "3 days ago",
-    title: "Great Value",
-    text: "Great service and value for money. Some minor hiccups but overall a memorable trip.",
-  },
-  {
-    id: "4",
-    name: "Jim Hopper",
-    avatar: "https://static.wikia.nocookie.net/strangerthings8338/images/2/2b/JimHopper.png/revision/latest?cb=20160819172733",
-    rating: 5,
-    date: "5 days ago",
-    title: "Smooth and Stress-Free",
-    text: "The best travel company I have used. Everything was smooth and stress-free from start to finish.",
-  },
-  {
-    id: "5",
-    name: "Joyce Byers",
-    avatar: "https://static.wikia.nocookie.net/strangerthings8338/images/4/40/ST4_Joyce.png/revision/latest?cb=20211107091328",
-    rating: 5,
-    date: "2 months ago",
-    title: "Excellent Planning",
-    text: "Excellent planning and support. Our family loved the trip and the experiences arranged for us.",
-  },
-];
-
 export default function TestimonialSection() {
+  const { state } = useAppData();
+  const testimonials = state.homePage?.testimonials || [];
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
