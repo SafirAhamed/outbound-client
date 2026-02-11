@@ -39,7 +39,7 @@ export default function DestinationPageListCard({
 
   return (
     <a
-      href={item.href || "#"}
+      href={item.destination ? `/packages/${item.destination}` : "#"}
       className={`group relative rounded-lg overflow-hidden border border-white/15 bg-black/30 flex ${className}`}
       aria-label={item.title}
     >
