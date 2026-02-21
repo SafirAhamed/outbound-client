@@ -1,31 +1,23 @@
-import DestinationCollage from "@/src/components/common/grid/DestinationsCollage";
-import GlobalLoaderWrapper from "@/src/components/common/layout/GlobalLoaderWrapper";
-import VideoCard from "@/src/components/VideoCard";
-import {
-  CUSTOMER_GALLERY_ROW1,
-  CUSTOMER_GALLERY_ROW2,
-} from "@/src/data/customerGallery";
-import {
-  DOMESTIC_DESTINATIONS,
-  INTERNATIONAL_DESTINATIONS,
-} from "@/src/data/internationalDestinations";
-import { VIDEO_CARD_FEATURE } from "@/src/data/videoCard";
-import FloatingAction from "@/src/features/Home/components/FloatingAction";
-import TrendingDestination from "@/src/features/Home/TrendingDestination";
-import CompanyStats from "@/src/features/v2/home/CompanyStats";
-import CustomerGallerySection from "@/src/features/v2/home/customerGallery/CustomerGallerySection";
-import CustomerStoriesMosaic from "@/src/features/v2/home/customerStoriesMosaic/CustomerStoriesMosaic";
-import Exclusive from "@/src/features/v2/home/exclusiveOffers/Exclusive";
-import FAQSection from "@/src/features/v2/home/faqs/FAQSection";
+import dynamic from 'next/dynamic';
 import HeroBanner from "@/src/features/v2/home/HeroBanner";
-import PlanYourTripSection from "@/src/features/v2/home/PlanYourTripSection";
-import VisualTrustSection from "@/src/features/v2/home/VisualTrustSection";
-import TripStylesSection from "@/src/features/v2/home/TripStylesSection";
-import EbookPromoBanner from "@/src/features/v2/home/promotionBanner/EbookPromoBanner";
+import TrendingDestination from "@/src/features/Home/TrendingDestination";
+import GlobalLoaderWrapper from "@/src/components/common/layout/GlobalLoaderWrapper";
+
+import CompanyStats from "@/src/features/v2/home/CompanyStats";
+import VideoCard from "@/src/components/VideoCard";
+import Exclusive from "@/src/features/v2/home/exclusiveOffers/Exclusive";
 import QuoteOne from "@/src/features/v2/home/quoteBanners/QuoteOne";
-import ReviewBadges from "@/src/features/v2/home/reviews/ReviewBadges";
-import TestimonialSection from "@/src/features/v2/home/reviews/TestimonialSection";
+import PlanYourTripSection from "@/src/features/v2/home/PlanYourTripSection";
+import CustomerGallerySection from "@/src/features/v2/home/customerGallery/CustomerGallerySection";
+import DestinationCollage from "@/src/components/common/grid/DestinationsCollage";
 import TrendingPackages from "@/src/features/v2/home/trending/TrendingPackages";
+import EbookPromoBanner from "@/src/features/v2/home/promotionBanner/EbookPromoBanner";
+import CustomerStoriesMosaic from "@/src/features/v2/home/customerStoriesMosaic/CustomerStoriesMosaic";
+import FAQSection from "@/src/features/v2/home/faqs/FAQSection";
+import TestimonialSection from "@/src/features/v2/home/reviews/TestimonialSection";
+import ReviewBadges from "@/src/features/v2/home/reviews/ReviewBadges";
+import FloatingAction from "@/src/features/Home/components/FloatingAction";
+
 // import AdditionalVideoBannerOne from "@/src/features/Home/AdditionalVideoBannerOne";
 // import BookYourTickets from "@/src/features/Home/BookYourTickets";
 // import CompanyStats from "@/src/features/Home/CompanyStats";
@@ -82,7 +74,7 @@ export default function Home() {
         <div className="px-4 md:px-6 my-6  max-w-screen-2xl mx-auto">
           <QuoteOne value={2} />
         </div>
-        <TrendingPackages viewAllUrl="/packages"/>
+        <TrendingPackages viewAllUrl="/packages" />
         <DestinationCollage
           type="domestic"
           heading="Domestic Destinations"

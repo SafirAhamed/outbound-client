@@ -1,4 +1,5 @@
 export interface PackagesCardItem {
+  id?: string;
   thumbnail: string;
   title: string;
   subtitle: string;

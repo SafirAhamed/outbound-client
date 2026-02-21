@@ -8,11 +8,13 @@ export default function CustomerStoriesMosaicSlide({
   page,
   pageSize,
   onOpenStory,
+  isActive,
 }: {
   stories: CustomerStory[];
   page: number;
   pageSize: number;
   onOpenStory: (absoluteIndex: number) => void;
+  isActive: boolean;
 }) {
   const isSingleCard = pageSize === 1;
 
@@ -30,33 +32,33 @@ export default function CustomerStoriesMosaicSlide({
               idx === 1
                 ? "md:translate-y-3 lg:translate-y-4"
                 : idx === 2
-                ? "md:-translate-y-2 lg:-translate-y-3"
-                : idx === 3
-                ? "md:translate-y-2 lg:translate-y-2"
-                : "";
+                  ? "md:-translate-y-2 lg:-translate-y-3"
+                  : idx === 3
+                    ? "md:translate-y-2 lg:translate-y-2"
+                    : "";
 
             const heightClass =
               idx === 0
                 ? ""
                 : idx === 1
-                ? "lg:h-[440px] xl:h-[480px]"
-                : idx === 2
-                ? "lg:h-[390px] xl:h-[420px]"
-                : "lg:h-[420px] xl:h-[460px]";
+                  ? "lg:h-[440px] xl:h-[480px]"
+                  : idx === 2
+                    ? "lg:h-[390px] xl:h-[420px]"
+                    : "lg:h-[420px] xl:h-[460px]";
 
             const absoluteIndex = page * pageSize + idx;
 
             return (
               <div
                 key={story.id}
-                className={`min-w-0 ${nudgeClass} ${
-                  isSingleCard ? "mx-auto w-[92%] max-w-sm" : ""
-                }`}
+                className={`min-w-0 ${nudgeClass} ${isSingleCard ? "mx-auto w-[92%] max-w-sm" : ""
+                  }`}
               >
                 <CustomerStoryMosaicTile
                   story={story}
                   index={idx}
                   className={heightClass}
+                  isActive={isActive}
                   onClick={() => onOpenStory(absoluteIndex)}
                 />
               </div>

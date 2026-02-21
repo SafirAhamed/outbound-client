@@ -96,15 +96,13 @@ export default function CustomerStoriesMosaicCarousel({
         <div className="relative w-full flex-1 px-0 sm:px-2 lg:px-3 py-4 sm:py-6">
           <div className="rounded-2xl overflow-x-hidden overflow-y-visible">
             <div
-              className={`flex ${
-                transitionEnabled
+              className={`flex ${transitionEnabled
                   ? "transition-transform duration-700 ease-out"
                   : "transition-none"
-              }`}
+                }`}
               style={{
-                transform: `translateX(-${
-                  (isWrapping ? visualPage : page) * 100
-                }%)`,
+                transform: `translateX(-${(isWrapping ? visualPage : page) * 100
+                  }%)`,
               }}
               onTransitionEnd={() => {
                 if (!isWrapping) return;
@@ -133,6 +131,7 @@ export default function CustomerStoriesMosaicCarousel({
                     page={isClone ? 0 : p}
                     pageSize={pageSize}
                     onOpenStory={onOpenStory}
+                    isActive={p === visualPage}
                   />
                 );
               })}

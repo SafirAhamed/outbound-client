@@ -6,7 +6,8 @@ import { API_URLS } from "@/src/api/apiUrls";
 import { useToast } from "@/src/context/ToastContext";
 import { DOMESTIC_DESTINATIONS, INTERNATIONAL_DESTINATIONS } from "@/src/data/internationalDestinations";
 import { fetchWithRetry } from "@/src/lib/fetchWithRetry";
-import { Destination, DestinationItem } from "@/types/destinations.types";
+import { Destination } from "@/types/destinations.types";
+import { DestinationItem } from "./DestinationCard";
 import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import DestinationPageListCard from "@/src/components/common/slidesAndCards/DestinationListPageCard";
@@ -88,7 +89,7 @@ const DestinationList: React.FC = () => {
           const layout = COLLAGE_LAYOUT[index % COLLAGE_LAYOUT.length];
 
           return {
-            id: raw.id || raw.place || String(index),
+            _id: raw.id || raw.place || String(index),
             title: raw.place ?? "Unknown Place",
             subtitle: raw.country ?? "",
             imageSrc:
@@ -135,7 +136,7 @@ const DestinationList: React.FC = () => {
             const desktopCls = spanDesktop[Math.round(item.sizeDesktop || 4)];
 
             return (
-              <div key={item.id} className={`${mobileCls} ${desktopCls}`}>
+              <div key={item._id} className={`${mobileCls} ${desktopCls}`}>
                 <DestinationPageListCard
                   item={item}
                   mobileHeight={DEFAULT_MOBILE_HEIGHT}

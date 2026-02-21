@@ -60,9 +60,9 @@ export default function DestinationPageListCard({
         )}
 
         <div className="absolute top-2 left-2 right-2 flex items-start justify-end gap-2">
-          <span className="inline-flex items-center rounded-full border border-white/15 bg-black/30 px-2 py-1 text-[10px] md:text-xs font-semibold text-white backdrop-blur">
+          {/* <span className="inline-flex items-center rounded-full border border-white/15 bg-black/30 px-2 py-1 text-[10px] md:text-xs font-semibold text-white backdrop-blur">
             {packagesText}
-          </span>
+          </span> */}
         </div>
 
         <div className="absolute bottom-2 left-2 right-2 flex flex-col gap-1">

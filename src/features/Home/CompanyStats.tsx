@@ -15,10 +15,14 @@ const CompanyStats = () => {
 
   const { state } = useAppData();
 
-  const data = state.homePage?.companyStats as CompanyStats| undefined;
+  const data = state.homePage?.companyStats as CompanyStats | undefined;
 
-  const yearsTarget = Number(data?.left?.value ?? 3);
-  const clientsTarget = Number(data?.right?.value ?? 10000);
+  // Assuming cards 0 and 1 represent the left and right stats respectively
+  const leftCard = data?.companyStatsCards?.[0];
+  const rightCard = data?.companyStatsCards?.[1];
+
+  const yearsTarget = Number(leftCard?.value ?? 3);
+  const clientsTarget = Number(rightCard?.value ?? 10000);
 
   const years = useCounter(0, startCounting ? yearsTarget : 0, 1500);
   const clients = useCounter(0, startCounting ? clientsTarget : 0, 1200);
@@ -47,20 +51,20 @@ const CompanyStats = () => {
           {/* LEFT STAT */}
           <div className="flex flex-col gap-2">
             <span className="text-lg md:text-3xl font-semibold tracking-widest text-white">
-              {data?.left?.label || "YEARS OF EXPERIENCE"}
+              {leftCard?.label || "YEARS OF EXPERIENCE"}
             </span>
             <span className="text-3xl md:text-6xl font-bold text-yellow-400">
-              {years}+
+              {years}{leftCard?.suffix || "+"}
             </span>
           </div>
 
           {/* RIGHT STAT */}
           <div className="flex flex-col gap-2">
             <span className="text-lg md:text-xl font-semibold tracking-widest text-white">
-              {data?.right?.label || "SATISFIED CLIENTS"}
+              {rightCard?.label || "SATISFIED CLIENTS"}
             </span>
             <span className="text-3xl md:text-6xl font-bold text-yellow-400">
-              {clients.toLocaleString()}+
+              {clients.toLocaleString()}{rightCard?.suffix || "+"}
             </span>
           </div>
         </div>

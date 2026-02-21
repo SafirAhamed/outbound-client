@@ -35,9 +35,8 @@ const PackagesList: React.FC = () => {
           apiQuery.set("place", destinationParam.toLowerCase());
 
         const apiUrl = destinationParam
-          ? `${API_URLS.packages}${
-              apiQuery.toString() ? `?${apiQuery.toString()}` : ""
-            }`
+          ? `${API_URLS.packages}${apiQuery.toString() ? `?${apiQuery.toString()}` : ""
+          }`
           : `${API_URLS.packages}?${apiQuery.toString()}`;
 
         console.log("Fetching packages from:", { apiUrl, destinationParam });
@@ -49,9 +48,9 @@ const PackagesList: React.FC = () => {
 
         setItems(
           data.results.map(
-            (raw): PackagesCardItem => ({
-              id: raw.id ?? "",
-              image: raw.image ?? "",
+            (raw: any): PackagesCardItem => ({
+              // map raw.image to thumbnail since PackagesCardItem expects thumbnail
+              thumbnail: raw.image ?? "",
               title: raw.title ?? "Untitled Package",
               subtitle: raw.subtitle ?? "",
               bestFor:
@@ -96,8 +95,8 @@ const PackagesList: React.FC = () => {
       destinationParam
         ? `${destinationParam} Packages`
         : typeParam
-        ? `${typeParam.toLowerCase()} Packages`
-        : "Packages"
+          ? `${typeParam.toLowerCase()} Packages`
+          : "Packages"
     );
 
     loadPackages();
@@ -118,7 +117,7 @@ const PackagesList: React.FC = () => {
             <PackagesSaleMiniCard
               key={item.id || item.link}
               id={item.id}
-              image={item.image}
+              thumbnail={item.thumbnail}
               title={item.title}
               rating={item.rating}
               subtitle={item.subtitle}

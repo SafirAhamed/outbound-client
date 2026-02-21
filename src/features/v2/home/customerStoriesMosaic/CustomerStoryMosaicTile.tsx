@@ -10,11 +10,13 @@ export default function CustomerStoryMosaicTile({
   index,
   onClick,
   className = "",
+  isActive,
 }: {
   story: CustomerStory;
   index: number;
   onClick: () => void;
   className?: string;
+  isActive: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
@@ -28,13 +30,17 @@ export default function CustomerStoryMosaicTile({
     video.muted = true;
     video.playsInline = true;
 
-    const attempt = video.play();
-    if (attempt && typeof attempt.catch === "function") {
-      attempt.catch(() => {
-        // Ignore autoplay rejections; the tile can still open fullscreen on tap.
-      });
+    if (isActive) {
+      const attempt = video.play();
+      if (attempt && typeof attempt.catch === "function") {
+        attempt.catch(() => {
+          // Ignore autoplay rejections; the tile can still open fullscreen on tap.
+        });
+      }
+    } else {
+      video.pause();
     }
-  }, [story.storyType, story.storyMedia]);
+  }, [isActive, story.storyType, story.storyMedia]);
 
   const hashStringToInt = (value: string) => {
     let hash = 0;
@@ -84,19 +90,19 @@ export default function CustomerStoryMosaicTile({
     index === 0
       ? "rounded-[28px]"
       : index === 1
-      ? "rounded-[26px]"
-      : index === 2
-      ? "rounded-[30px]"
-      : "rounded-[24px]";
+        ? "rounded-[26px]"
+        : index === 2
+          ? "rounded-[30px]"
+          : "rounded-[24px]";
 
   const ringClass =
     index === 0
       ? "ring-white/25"
       : index === 1
-      ? "ring-white/20"
-      : index === 2
-      ? "ring-white/30"
-      : "ring-white/20";
+        ? "ring-white/20"
+        : index === 2
+          ? "ring-white/30"
+          : "ring-white/20";
 
   return (
     <div
@@ -120,11 +126,10 @@ export default function CustomerStoryMosaicTile({
             className="absolute inset-0 h-full w-full object-cover pointer-events-none transition-transform duration-700 ease-out group-hover:scale-[1.06]"
             src={story.storyMedia}
             poster={story.storyThumbnail}
-            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload={isActive ? "metadata" : "none"}
             onCanPlay={() => setIsVideoReady(true)}
             aria-hidden="true"
           />
@@ -133,11 +138,11 @@ export default function CustomerStoryMosaicTile({
             src={story.storyThumbnail}
             alt={story.caption || "Customer story"}
             fill
-            priority={index === 0}
+            priority={isActive && index === 0}
+            loading={isActive ? "eager" : "lazy"}
             sizes="(min-width: 1024px) 25vw, 50vw"
-            className={`object-cover pointer-events-none transition-opacity duration-300 ${
-              isVideoReady ? "opacity-0" : "opacity-100"
-            }`}
+            className={`object-cover pointer-events-none transition-opacity duration-300 ${isVideoReady ? "opacity-0" : "opacity-100"
+              }`}
           />
         </>
       ) : (
@@ -145,7 +150,8 @@ export default function CustomerStoryMosaicTile({
           src={story.storyThumbnail}
           alt={story.caption || "Customer story"}
           fill
-          priority={index === 0}
+          priority={isActive && index === 0}
+          loading={isActive ? "eager" : "lazy"}
           sizes="(min-width: 1024px) 25vw, 50vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
         />

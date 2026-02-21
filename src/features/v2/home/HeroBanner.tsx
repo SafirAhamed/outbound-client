@@ -19,22 +19,22 @@ const SAMPLE_BANNER: HeroBannerType = {
     "Explore curated destinations, tailored packages, and unforgettable experiences.",
   design: {
     videoSources: [
-        {
-          src: "https://cdn.pixabay.com/video/2021/10/12/91757-636709171_large.mp4",
-          type: "video/mp4",
-        },
-        {
-          src: "https://static.vecteezy.com/system/resources/previews/034/138/597/webm/snow-hill-nature-free-video.webm",
-          type: "video/webm",
-        },
-        // {
-        //   src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-        //   type: "video/mp4",
-        // },
-        // {
-        //   src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.webm",
-        //   type: "video/webm",
-        // },
+      {
+        src: "https://cdn.pixabay.com/video/2021/10/12/91757-636709171_large.mp4",
+        type: "video/mp4",
+      },
+      {
+        src: "https://static.vecteezy.com/system/resources/previews/034/138/597/webm/snow-hill-nature-free-video.webm",
+        type: "video/webm",
+      },
+      // {
+      //   src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      //   type: "video/mp4",
+      // },
+      // {
+      //   src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.webm",
+      //   type: "video/webm",
+      // },
     ],
     fallbackImage:
       "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop",
@@ -137,40 +137,38 @@ export default function HeroBanner({ data, className = "" }: HeroBannerProps) {
     const v = videoRef.current;
     if (!v) return;
 
-    const attempt = v.play();
-    if (attempt && "catch" in attempt) {
-      (attempt as Promise<void>).catch(() => {
-        v.muted = true;
-        v.play().catch(() => {});
-      });
+    // We rely primarily on the autoPlay attribute. If that fails (e.g., low power mode),
+    // we don't aggressively force it, reducing main thread work.
+    if (v.paused) {
+      v.muted = true;
+      v.play().catch(() => { });
     }
   }, []);
 
   return (
     <section
-      className={`relative overflow-hidden w-full ${
-        d?.heightClass ?? ""
-      } ${className}`}
+      className={`relative overflow-hidden w-full ${d?.heightClass ?? ""
+        } ${className}`}
       style={fontStyle}
     >
       {/* Background media */}
       <div className="absolute inset-0">
-        {/* Fallback image until video is ready (or if video errors) */}
-        {d?.fallbackImage && (!videoReady || videoError) && (
+        {/* Fallback image always rendered so Lighthouse pins it as LCP */}
+        {d?.fallbackImage && (
           <Image
             src={d?.fallbackImage}
             alt=""
             fill
             sizes="100vw"
-            priority
-            className="object-cover"
+            priority={true}
+            className="object-cover absolute inset-0 z-0"
           />
         )}
 
         {!videoError && (d?.videoSources?.length ?? 0) > 0 && (
           <video
             ref={videoRef}
-            className="absolute inset-0 w-full h-full object-cover"
+            className={`absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-700 ${videoReady ? "opacity-100" : "opacity-0"}`}
             autoPlay
             loop
             muted

@@ -616,7 +616,7 @@ export function useHomePageFetcher(url: string) {
       {
         "_id": "switzerland",
         "title": "Switzerland",
-        "subtitle"  : "Rail lines through alpine clarity.",
+        "subtitle": "Rail lines through alpine clarity.",
         "imageSrc": "https://acko-cms.ackoassets.com/switzer_land_d4ff3a3099.png",
         "destination": "switzerland",
         "priceFrom": "$2100",
@@ -930,12 +930,30 @@ export function useHomePageFetcher(url: string) {
         "text": "Excellent planning and support. Our family loved the trip and the experiences arranged for us.",
       },
     ],
-  };
+    "topCelebrities": {
+      "left": { "videoUrl": "", "title": "" },
+      "right": { "videoUrl": "" },
+    },
+    "bookYourTicketsSection": {
+      "title": "",
+      "description": "",
+      "image": "",
+      "tabs": [],
+      "ctaButtonText": ""
+    },
+    "communityBanner": {
+      "title": "",
+      "subTitle": "",
+      "ctaButtonText": "",
+      "bgImage": "",
+      "whatsappLink": ""
+    }
+  } as unknown as HomePage;
 
   // Always set default data on mount
   useEffect(() => {
     setHomePage(defaultData);
   }, []);
 
-  return { loading, error, reload: () => {} };
+  return { loading, error, reload: () => { } };
 }

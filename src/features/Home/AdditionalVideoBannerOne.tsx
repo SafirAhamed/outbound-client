@@ -14,7 +14,7 @@ const AdditionalVideoBannerOne = () => {
 
   return (
     <Section fullWidth>
-      <VideoCard config={videoConfig} />
+      <VideoCard />
     </Section>
   );
 };

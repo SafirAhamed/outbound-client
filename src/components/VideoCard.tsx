@@ -62,13 +62,22 @@ export default function VideoCard({ className = "" }: VideoCardProps) {
     if (!el) return;
     const obs = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) setIsVisible(true);
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          if (videoRef.current && videoReady) {
+            videoRef.current.play().catch(() => { });
+          }
+        } else {
+          if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        }
       },
       { threshold: 0.25 }
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [videoReady]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -76,13 +85,7 @@ export default function VideoCard({ className = "" }: VideoCardProps) {
     v.muted = true;
     const onLoaded = () => {
       setVideoReady(true);
-      const p = v.play();
-      if (p && p.catch) {
-        p.catch(() => {
-          v.muted = true;
-          setTimeout(() => v.play().catch(() => {}), 200);
-        });
-      }
+      // Removed automatic play here. It will be handled by the IntersectionObserver.
     };
     v.addEventListener("loadeddata", onLoaded);
     v.addEventListener("playing", onLoaded);
@@ -96,8 +99,8 @@ export default function VideoCard({ className = "" }: VideoCardProps) {
     align === "left"
       ? "items-start text-left"
       : align === "right"
-      ? "items-end text-right"
-      : "items-center text-center";
+        ? "items-end text-right"
+        : "items-center text-center";
 
   return (
     <section
@@ -112,12 +115,11 @@ export default function VideoCard({ className = "" }: VideoCardProps) {
           <video
             ref={videoRef}
             className="h-full w-full object-cover"
-            autoPlay
             muted
             playsInline
             webkit-playsinline="true"
             loop
-            preload="auto"
+            preload="none"
             poster={poster}
             disablePictureInPicture
             controls={false}
@@ -125,8 +127,8 @@ export default function VideoCard({ className = "" }: VideoCardProps) {
           >
             {videoSources && videoSources.length
               ? videoSources.map((s) => (
-                  <source key={s.src} src={s.src} type={s.type} />
-                ))
+                <source key={s.src} src={s.src} type={s.type} />
+              ))
               : videoSrc && <source src={videoSrc} type="video/mp4" />}
           </video>
         )}
@@ -143,11 +145,10 @@ export default function VideoCard({ className = "" }: VideoCardProps) {
         <div
           className="absolute inset-0"
           style={{
-            background: `${
-              overlayFrom
-                ? `linear-gradient(to top, ${overlayFrom}, ${overlayTo})`
-                : "transparent"
-            }`,
+            background: `${overlayFrom
+              ? `linear-gradient(to top, ${overlayFrom}, ${overlayTo})`
+              : "transparent"
+              }`,
           }}
         />
       </div>

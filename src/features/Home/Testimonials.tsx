@@ -14,8 +14,8 @@ const Testimonials = () => {
             key={t.name + idx}
             name={t.name}
             text={t.text}
-            image={t.image}
-            align={t.align as "left" | "right"}
+            image={t.avatar}
+            align={(t as any).align as "left" | "right"}
           />
         ))}
       </div>

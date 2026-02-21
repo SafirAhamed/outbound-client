@@ -8,9 +8,9 @@ import { ClientImageCardProps } from "@/types/homePage.types";
 const OurClients = () => {
   const { state } = useAppData();
 
-  const data = state.homePage?.ourClients ?? [];
+  const data = (state.homePage as any)?.ourClients ?? [];
 
-  const ourClients: ClientImageCardProps[] = data.map((d) => ({
+  const ourClients: ClientImageCardProps[] = data.map((d: any) => ({
     id: d.id,
     src: d.src ?? "",
     alt: d.alt ?? "Client image",

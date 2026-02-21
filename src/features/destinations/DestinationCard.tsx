@@ -1,5 +1,13 @@
 "use client";
-import { DestinationItem } from "@/types/destinations.types";
+export interface DestinationItem {
+  id?: string;
+  place?: string;
+  country?: string;
+  images?: string[];
+  type?: string;
+  highlights?: string[];
+  amount?: number;
+}
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -87,7 +95,7 @@ const DestinationCard: React.FC<Props> = ({ item }) => {
               className="text-[#052210] text-base sm:text-lg font-bold"
               itemProp="price"
             >
-              {formatINR(item.amount)}
+              {formatINR(item.amount || 0)}
             </span>
             <meta itemProp="priceCurrency" content="INR" />
             <link itemProp="availability" href="https://schema.org/InStock" />

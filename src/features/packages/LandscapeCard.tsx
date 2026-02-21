@@ -10,7 +10,7 @@ import { PackagesCardItem } from "@/types/packages.types";
 import { Heart, Phone, User, Users } from "lucide-react";
 
 const LandscapeCard: React.FC<PackagesCardItem> = ({
-  image,
+  thumbnail,
   title,
   subtitle,
   rating,
@@ -41,13 +41,12 @@ const LandscapeCard: React.FC<PackagesCardItem> = ({
 
 Package Name: ${title || "N/A"}
 Duration: ${days || "?"} Days / ${nights || "?"} Nights
-Price: ₹${
-    typeof price !== "undefined" &&
-    price !== null &&
-    `${price}`.trim().length > 0
+Price: ₹${typeof price !== "undefined" &&
+      price !== null &&
+      `${price}`.trim().length > 0
       ? price
       : "?"
-  }
+    }
 Package Link: ${url}
 
 Please provide more details.`;
@@ -65,7 +64,7 @@ Please provide more details.`;
       {/* Image */}
       <div className="relative h-full w-1/3 overflow-hidden">
         <Image
-          src={image || FALLBACK_IMAGE_URL}
+          src={thumbnail || FALLBACK_IMAGE_URL}
           alt={title}
           fill
           className="object-cover transition-transform duration-500 group-hover/card:scale-110"
