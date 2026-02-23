@@ -1,0 +1,56 @@
+{
+  "row1": [
+    {
+      "id": "r1-1",
+      "type": "image",
+      "imageSrc": "https://media3.thrillophilia.com/filestore/jezkw1hz3yrpmiqlbobdguc5f54m_shutterstock_1938178192.jpg?w=1440&dpr=2"
+    },
+    {
+      "id": "r1-2",
+      "type": "image",
+      "imageSrc": "https://www.lovelytrails.com/admin/image.php?path=photouploads%2F17048583927.jpg"
+    },
+    {
+      "id": "r1-3",
+      "type": "image",
+      "imageSrc": "https://go4explore.com/_next/image?url=https%3A%2F%2Fd2qa7a8q0vuocm.cloudfront.net%2Fimages%2F39550020241118085132.png&w=3840&q=75"
+    },
+    {
+      "id": "r1-4",
+      "type": "image",
+      "imageSrc": "https://media3.thrillophilia.com/filestore/o53vpvq51a8p0tci6buwp8kavawt_DSC_0003.JPG?w=400&dpr=2"
+    },
+    {
+      "id": "r1-5",
+      "type": "image",
+      "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlpXEfZ5ZzYHejEpOBgA9IEjmtsRsmTUTmHQ&s"
+    }
+  ],
+  "row2": [
+    {
+      "id": "r2-1",
+      "type": "image",
+      "imageSrc": "https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=1400&auto=format&fit=crop"
+    },
+    {
+      "id": "r2-2",
+      "type": "image",
+      "imageSrc": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop"
+    },
+    {
+      "id": "r2-3",
+      "type": "image",
+      "imageSrc": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop"
+    },
+    {
+      "id": "r2-4",
+      "type": "image",
+      "imageSrc": "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1400&auto=format&fit=crop"
+    },
+    {
+      "id": "r2-5",
+      "type": "image",
+      "imageSrc": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1400&auto=format&fit=crop"
+    }
+  ]
+}
